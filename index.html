@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ASIT Vector Tile Repro - ArcGIS JS API 5.0</title>
+  <title>Vector Tile Style Repro - ArcGIS JS API 5.0</title>
   <link rel="stylesheet" href="https://js.arcgis.com/5.0/esri/themes/light/main.css" />
   <script type="module" src="https://js.arcgis.com/5.0/"></script>
   <style>
@@ -108,6 +108,7 @@
     <div class="buttonRow" role="group" aria-label="Source mode">
       <button id="remoteStyleModeButton" class="modeButton" type="button" aria-pressed="true">ASIT remote style</button>
       <button id="swisstopoStyleModeButton" class="modeButton" type="button" aria-pressed="false">CH basemap style</button>
+      <button id="swisstopoProLiteModeButton" class="modeButton" type="button" aria-pressed="false">CH basemap Pro lite</button>
       <button id="tileJsonModeButton" class="modeButton" type="button" aria-pressed="false">ASIT TileJSON</button>
     </div>
 
@@ -128,6 +129,7 @@
   <script type="module">
     const remoteStyleUrl = "https://vt.asit-asso.ch/styles/asit.color/style.json";
     const swisstopoStyleUrl = "https://vectortiles.geo.admin.ch/styles/ch.swisstopo.basemap.vt/style.json";
+    const swisstopoProLiteStyleUrl = "./swisstopo.basemap.pro-lite.style.json";
     const swisstopoBaseTileJsonUrl = "https://vectortiles.geo.admin.ch/tiles/ch.swisstopo.base.vt/v1.0.0/tiles.json";
     const tileJsonUrl = "https://vt.asit-asso.ch/tiles/asit/v0.1/3857/tiles.json";
     const center = [7.4586, 46.9598];
@@ -150,6 +152,14 @@
         tileJsonDisplay: swisstopoBaseTileJsonUrl,
         note: "Loads the hosted swisstopo basemap style online. For simplicity, the panel shows only the main base TileJSON source and skips the additional relief source used by the full style."
       },
+      swisstopoProLite: {
+        buttonId: "swisstopoProLiteModeButton",
+        label: "CH basemap Pro lite",
+        runtimeUrl: swisstopoProLiteStyleUrl,
+        displayUrl: swisstopoProLiteStyleUrl,
+        tileJsonDisplay: swisstopoBaseTileJsonUrl,
+        note: "Loads the local swisstopo Pro-lite style: base source only, no relief, no sprite icons, text labels only, tuned for ArcGIS Pro testing. Serve this page over http://localhost for this mode."
+      },
       tilejson: {
         buttonId: "tileJsonModeButton",
         label: "ASIT TileJSON",
@@ -169,6 +179,7 @@
     const modeButtons = {
       remoteStyle: document.getElementById("remoteStyleModeButton"),
       swisstopoStyle: document.getElementById("swisstopoStyleModeButton"),
+      swisstopoProLite: document.getElementById("swisstopoProLiteModeButton"),
       tilejson: document.getElementById("tileJsonModeButton")
     };
 
@@ -308,6 +319,12 @@
         modeButtons.swisstopoStyle.addEventListener("click", () => {
           if (currentMode !== "swisstopoStyle") {
             loadMode("swisstopoStyle");
+          }
+        });
+
+        modeButtons.swisstopoProLite.addEventListener("click", () => {
+          if (currentMode !== "swisstopoProLite") {
+            loadMode("swisstopoProLite");
           }
         });
 
