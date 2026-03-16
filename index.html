@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ASIT Vector Tile Repro - ArcGIS JS API 5.0</title>
+  <link rel="stylesheet" href="https://js.arcgis.com/5.0/esri/themes/light/main.css" />
+  <script type="module" src="https://js.arcgis.com/5.0/"></script>
+  <style>
+    html,
+    body,
+    #viewDiv {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    body {
+      font-family: "Aptos", "Segoe UI", sans-serif;
+    }
+
+    #statusPanel {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 10;
+      width: min(500px, calc(100vw - 24px));
+      padding: 12px 14px;
+      border: 1px solid #8e9aaf;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 10px 24px rgba(17, 24, 39, 0.15);
+      color: #1f2933;
+    }
+
+    #statusPanel[data-state="ok"] {
+      border-color: #2d6a4f;
+    }
+
+    #statusPanel[data-state="error"] {
+      border-color: #bc4749;
+    }
+
+    .label {
+      margin-top: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #52606d;
+    }
+
+    .label:first-child {
+      margin-top: 0;
+    }
+
+    .value {
+      margin-top: 4px;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .buttonRow {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+
+    .modeButton {
+      border: 1px solid #8e9aaf;
+      border-radius: 999px;
+      background: #f8fafc;
+      color: #243b53;
+      padding: 7px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .modeButton[aria-pressed="true"] {
+      background: #243b53;
+      border-color: #243b53;
+      color: #ffffff;
+    }
+
+    .code {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    #statusMessage {
+      margin: 8px 0 0;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <div id="viewDiv"></div>
+
+  <section id="statusPanel" data-state="loading" aria-live="polite">
+    <div class="label">API</div>
+    <div class="value">ArcGIS Maps SDK for JavaScript 5.0</div>
+
+    <div class="label">Mode</div>
+    <div class="buttonRow" role="group" aria-label="Source mode">
+      <button id="remoteStyleModeButton" class="modeButton" type="button" aria-pressed="true">Remote style</button>
+      <button id="localStyleModeButton" class="modeButton" type="button" aria-pressed="false">Local style copy</button>
+      <button id="localNoHillshadeModeButton" class="modeButton" type="button" aria-pressed="false">Local no hillshade</button>
+      <button id="tileJsonModeButton" class="modeButton" type="button" aria-pressed="false">TileJSON only</button>
+    </div>
+
+    <div class="label">Primary URL</div>
+    <div id="primaryUrl" class="value code"></div>
+
+    <div class="label">TileJSON source</div>
+    <div id="tileJsonUrl" class="value code"></div>
+
+    <div class="label">Mode note</div>
+    <div id="modeNote" class="value"></div>
+
+    <div class="label">Status</div>
+    <div id="statusValue" class="value">loading</div>
+
+    <pre id="statusMessage" class="value"></pre>
+  </section>
+
+  <script src="./local-styles-data.js"></script>
+  <script type="module">
+    const remoteStyleUrl = "https://vt.asit-asso.ch/styles/asit.color/style.json";
+    const localStylePath = "./asit.color.style.json";
+    const localNoHillshadePath = "./asit.color.no-hillshade.style.json";
+    const tileJsonUrl = "https://vt.asit-asso.ch/tiles/asit/v0.1/3857/tiles.json";
+    const center = [7.4586, 46.9598];
+    const zoom = 12;
+    const localStyles = window.__asitLocalStyles || {};
+
+    if (!localStyles.localStyleCopy || !localStyles.localNoHillshadeStyle) {
+      throw new Error("Local style payload is missing. Check local-styles-data.js.");
+    }
+
+    function createStyleBlobUrl(styleObject) {
+      return URL.createObjectURL(
+        new Blob([JSON.stringify(styleObject)], { type: "application/json" })
+      );
+    }
+
+    const localStyleBlobUrl = createStyleBlobUrl(localStyles.localStyleCopy);
+    const localNoHillshadeBlobUrl = createStyleBlobUrl(localStyles.localNoHillshadeStyle);
+
+    const modes = {
+      remoteStyle: {
+        buttonId: "remoteStyleModeButton",
+        label: "Remote style",
+        runtimeUrl: remoteStyleUrl,
+        displayUrl: remoteStyleUrl,
+        note: "Loads the hosted ASIT style JSON and applies the ASIT cartography on top of the vector tiles from the TileJSON source below."
+      },
+      localStyle: {
+        buttonId: "localStyleModeButton",
+        label: "Local style copy",
+        runtimeUrl: localStyleBlobUrl,
+        displayUrl: localStylePath,
+        note: "Loads the checked-in local copy of the ASIT style JSON. This keeps the same TileJSON source while making the style fully local to the repro."
+      },
+      localNoHillshade: {
+        buttonId: "localNoHillshadeModeButton",
+        label: "Local no hillshade",
+        runtimeUrl: localNoHillshadeBlobUrl,
+        displayUrl: localNoHillshadePath,
+        note: "Loads the checked-in local style copy with the Hillshade layer and relief source removed, while keeping the same TileJSON-backed vector cartography."
+      },
+      tilejson: {
+        buttonId: "tileJsonModeButton",
+        label: "TileJSON only",
+        runtimeUrl: tileJsonUrl,
+        displayUrl: tileJsonUrl,
+        note: "Loads only the raw vector tile source. Useful to prove data access, but it does not represent the final ASIT styling."
+      }
+    };
+
+    const statusPanel = document.getElementById("statusPanel");
+    const primaryUrlNode = document.getElementById("primaryUrl");
+    const tileJsonUrlNode = document.getElementById("tileJsonUrl");
+    const modeNoteNode = document.getElementById("modeNote");
+    const statusValueNode = document.getElementById("statusValue");
+    const statusMessageNode = document.getElementById("statusMessage");
+    const modeButtons = {
+      remoteStyle: document.getElementById("remoteStyleModeButton"),
+      localStyle: document.getElementById("localStyleModeButton"),
+      localNoHillshade: document.getElementById("localNoHillshadeModeButton"),
+      tilejson: document.getElementById("tileJsonModeButton")
+    };
+
+    tileJsonUrlNode.textContent = tileJsonUrl;
+
+    window.__status = {
+      step: "loading",
+      mode: "remoteStyle",
+      message: "Waiting for the map to initialize."
+    };
+    let currentMode = "remoteStyle";
+    let currentLayer = null;
+    let loadToken = 0;
+
+    function setStatus(step, message = "") {
+      window.__status = { step, mode: currentMode, message };
+      statusValueNode.textContent = step;
+      statusMessageNode.textContent = message;
+
+      if (step.endsWith("-ok")) {
+        statusPanel.dataset.state = "ok";
+      } else if (step.includes("error")) {
+        statusPanel.dataset.state = "error";
+      } else {
+        statusPanel.dataset.state = "loading";
+      }
+    }
+
+    function errorMessage(error) {
+      return error?.message || String(error);
+    }
+
+    function setModeUi(modeKey) {
+      const mode = modes[modeKey];
+      currentMode = modeKey;
+      primaryUrlNode.textContent = mode.displayUrl;
+      modeNoteNode.textContent = mode.note;
+
+      for (const [key, button] of Object.entries(modeButtons)) {
+        button.setAttribute("aria-pressed", String(key === modeKey));
+      }
+    }
+
+    window.addEventListener("error", (event) => {
+      const message = event.message || "Unknown window error";
+      console.error("WINDOW_FAIL", message);
+      setStatus("window-error", message);
+    });
+
+    window.addEventListener("unhandledrejection", (event) => {
+      const message = errorMessage(event.reason);
+      console.error("UNHANDLED_REJECTION", message);
+      setStatus("unhandledrejection-error", message);
+    });
+
+    window.addEventListener("beforeunload", () => {
+      URL.revokeObjectURL(localStyleBlobUrl);
+      URL.revokeObjectURL(localNoHillshadeBlobUrl);
+    });
+
+    setModeUi(currentMode);
+    setStatus("loading", "Waiting for layer and view to load.");
+
+    try {
+      const [Map, MapView, VectorTileLayer] = await $arcgis.import([
+        "@arcgis/core/Map.js",
+        "@arcgis/core/views/MapView.js",
+        "@arcgis/core/layers/VectorTileLayer.js"
+      ]);
+
+      currentLayer = new VectorTileLayer({ url: modes[currentMode].runtimeUrl });
+      const map = new Map({ layers: [currentLayer] });
+
+      const view = new MapView({
+        container: "viewDiv",
+        map,
+        center,
+        zoom
+      });
+
+      async function loadMode(modeKey) {
+        const mode = modes[modeKey];
+        const requestId = ++loadToken;
+        setModeUi(modeKey);
+        setStatus("loading", `Loading ${mode.label}...`);
+
+        if (currentLayer) {
+          map.remove(currentLayer);
+          currentLayer.destroy();
+          currentLayer = null;
+        }
+
+        const layer = new VectorTileLayer({ url: mode.runtimeUrl });
+        currentLayer = layer;
+        map.add(layer);
+
+        layer.when().then(() => {
+          if (requestId !== loadToken) {
+            return;
+          }
+          console.log("LAYER_OK");
+          setStatus("layer-ok", `VectorTileLayer resolved successfully from ${mode.label}.`);
+        }).catch((error) => {
+          if (requestId !== loadToken) {
+            return;
+          }
+          const message = errorMessage(error);
+          console.error("LAYER_FAIL", message);
+          setStatus("layer-error", message);
+        });
+
+        try {
+          await layer.when();
+          if (requestId !== loadToken) {
+            return;
+          }
+          await view.whenLayerView(layer);
+          if (requestId !== loadToken) {
+            return;
+          }
+          console.log("LAYERVIEW_OK");
+          setStatus("layerview-ok", `LayerView created successfully. ${mode.note}`);
+        } catch (error) {
+          if (requestId !== loadToken) {
+            return;
+          }
+          const message = errorMessage(error);
+          if (window.__status.step === "layer-error") {
+            return;
+          }
+          console.error("LAYERVIEW_FAIL", message);
+          setStatus("layerview-error", message);
+        }
+      }
+
+      view.when().then(() => {
+        modeButtons.remoteStyle.addEventListener("click", () => {
+          if (currentMode !== "remoteStyle") {
+            loadMode("remoteStyle");
+          }
+        });
+
+        modeButtons.localStyle.addEventListener("click", () => {
+          if (currentMode !== "localStyle") {
+            loadMode("localStyle");
+          }
+        });
+
+        modeButtons.localNoHillshade.addEventListener("click", () => {
+          if (currentMode !== "localNoHillshade") {
+            loadMode("localNoHillshade");
+          }
+        });
+
+        modeButtons.tilejson.addEventListener("click", () => {
+          if (currentMode !== "tilejson") {
+            loadMode("tilejson");
+          }
+        });
+
+        loadMode(currentMode);
+      }).catch((error) => {
+        const message = errorMessage(error);
+        console.error("VIEW_FAIL", message);
+        setStatus("view-error", message);
+      });
+    } catch (error) {
+      const message = errorMessage(error);
+      console.error("BOOT_FAIL", message);
+      setStatus("boot-error", message);
+    }
+  </script>
+</body>
+</html>
