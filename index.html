@@ -106,10 +106,9 @@
 
     <div class="label">Mode</div>
     <div class="buttonRow" role="group" aria-label="Source mode">
-      <button id="remoteStyleModeButton" class="modeButton" type="button" aria-pressed="true">Remote style</button>
-      <button id="localStyleModeButton" class="modeButton" type="button" aria-pressed="false">Local style copy</button>
-      <button id="localNoHillshadeModeButton" class="modeButton" type="button" aria-pressed="false">Local no hillshade</button>
-      <button id="tileJsonModeButton" class="modeButton" type="button" aria-pressed="false">TileJSON only</button>
+      <button id="remoteStyleModeButton" class="modeButton" type="button" aria-pressed="true">ASIT remote style</button>
+      <button id="swisstopoStyleModeButton" class="modeButton" type="button" aria-pressed="false">CH basemap style</button>
+      <button id="tileJsonModeButton" class="modeButton" type="button" aria-pressed="false">ASIT TileJSON</button>
     </div>
 
     <div class="label">Primary URL</div>
@@ -126,57 +125,37 @@
 
     <pre id="statusMessage" class="value"></pre>
   </section>
-
-  <script src="./local-styles-data.js"></script>
   <script type="module">
     const remoteStyleUrl = "https://vt.asit-asso.ch/styles/asit.color/style.json";
-    const localStylePath = "./asit.color.style.json";
-    const localNoHillshadePath = "./asit.color.no-hillshade.style.json";
+    const swisstopoStyleUrl = "https://vectortiles.geo.admin.ch/styles/ch.swisstopo.basemap.vt/style.json";
+    const swisstopoBaseTileJsonUrl = "https://vectortiles.geo.admin.ch/tiles/ch.swisstopo.base.vt/v1.0.0/tiles.json";
     const tileJsonUrl = "https://vt.asit-asso.ch/tiles/asit/v0.1/3857/tiles.json";
     const center = [7.4586, 46.9598];
     const zoom = 12;
-    const localStyles = window.__asitLocalStyles || {};
-
-    if (!localStyles.localStyleCopy || !localStyles.localNoHillshadeStyle) {
-      throw new Error("Local style payload is missing. Check local-styles-data.js.");
-    }
-
-    function createStyleBlobUrl(styleObject) {
-      return URL.createObjectURL(
-        new Blob([JSON.stringify(styleObject)], { type: "application/json" })
-      );
-    }
-
-    const localStyleBlobUrl = createStyleBlobUrl(localStyles.localStyleCopy);
-    const localNoHillshadeBlobUrl = createStyleBlobUrl(localStyles.localNoHillshadeStyle);
 
     const modes = {
       remoteStyle: {
         buttonId: "remoteStyleModeButton",
-        label: "Remote style",
+        label: "ASIT remote style",
         runtimeUrl: remoteStyleUrl,
         displayUrl: remoteStyleUrl,
+        tileJsonDisplay: tileJsonUrl,
         note: "Loads the hosted ASIT style JSON and applies the ASIT cartography on top of the vector tiles from the TileJSON source below."
       },
-      localStyle: {
-        buttonId: "localStyleModeButton",
-        label: "Local style copy",
-        runtimeUrl: localStyleBlobUrl,
-        displayUrl: localStylePath,
-        note: "Loads the checked-in local copy of the ASIT style JSON. This keeps the same TileJSON source while making the style fully local to the repro."
-      },
-      localNoHillshade: {
-        buttonId: "localNoHillshadeModeButton",
-        label: "Local no hillshade",
-        runtimeUrl: localNoHillshadeBlobUrl,
-        displayUrl: localNoHillshadePath,
-        note: "Loads the checked-in local style copy with the Hillshade layer and relief source removed, while keeping the same TileJSON-backed vector cartography."
+      swisstopoStyle: {
+        buttonId: "swisstopoStyleModeButton",
+        label: "CH basemap style",
+        runtimeUrl: swisstopoStyleUrl,
+        displayUrl: swisstopoStyleUrl,
+        tileJsonDisplay: swisstopoBaseTileJsonUrl,
+        note: "Loads the hosted swisstopo basemap style online. For simplicity, the panel shows only the main base TileJSON source and skips the additional relief source used by the full style."
       },
       tilejson: {
         buttonId: "tileJsonModeButton",
-        label: "TileJSON only",
+        label: "ASIT TileJSON",
         runtimeUrl: tileJsonUrl,
         displayUrl: tileJsonUrl,
+        tileJsonDisplay: tileJsonUrl,
         note: "Loads only the raw vector tile source. Useful to prove data access, but it does not represent the final ASIT styling."
       }
     };
@@ -189,12 +168,9 @@
     const statusMessageNode = document.getElementById("statusMessage");
     const modeButtons = {
       remoteStyle: document.getElementById("remoteStyleModeButton"),
-      localStyle: document.getElementById("localStyleModeButton"),
-      localNoHillshade: document.getElementById("localNoHillshadeModeButton"),
+      swisstopoStyle: document.getElementById("swisstopoStyleModeButton"),
       tilejson: document.getElementById("tileJsonModeButton")
     };
-
-    tileJsonUrlNode.textContent = tileJsonUrl;
 
     window.__status = {
       step: "loading",
@@ -227,6 +203,7 @@
       const mode = modes[modeKey];
       currentMode = modeKey;
       primaryUrlNode.textContent = mode.displayUrl;
+      tileJsonUrlNode.textContent = mode.tileJsonDisplay;
       modeNoteNode.textContent = mode.note;
 
       for (const [key, button] of Object.entries(modeButtons)) {
@@ -244,11 +221,6 @@
       const message = errorMessage(event.reason);
       console.error("UNHANDLED_REJECTION", message);
       setStatus("unhandledrejection-error", message);
-    });
-
-    window.addEventListener("beforeunload", () => {
-      URL.revokeObjectURL(localStyleBlobUrl);
-      URL.revokeObjectURL(localNoHillshadeBlobUrl);
     });
 
     setModeUi(currentMode);
@@ -333,15 +305,9 @@
           }
         });
 
-        modeButtons.localStyle.addEventListener("click", () => {
-          if (currentMode !== "localStyle") {
-            loadMode("localStyle");
-          }
-        });
-
-        modeButtons.localNoHillshade.addEventListener("click", () => {
-          if (currentMode !== "localNoHillshade") {
-            loadMode("localNoHillshade");
+        modeButtons.swisstopoStyle.addEventListener("click", () => {
+          if (currentMode !== "swisstopoStyle") {
+            loadMode("swisstopoStyle");
           }
         });
 
