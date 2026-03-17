@@ -1,0 +1,3477 @@
+{
+  "version": 8,
+  "transition": {
+    "duration": 500,
+    "delay": 0
+  },
+  "name": "ASIT Fond couleur",
+  "id": "asit.color",
+  "description": "ASIT Fond couleur",
+  "metadata": {
+    "ol:webfonts": "https://vt.asit-asso.ch/fonts/web/{Font+Family}/{fontweight}{-fontstyle}.css"
+  },
+  "sources": {
+    "asit": {
+      "type": "vector",
+      "url": "https://vt.asit-asso.ch/tiles/asit/v0.1/3857/tiles.json"
+    }
+  },
+  "glyphs": "https://vt.asit-asso.ch/fonts/{fontstack}/{range}.pbf",
+  "zoom": 7.5,
+  "center": [
+    7.458556880930587,
+    46.959770261045776
+  ],
+  "layers": [
+    {
+      "id": "Background",
+      "type": "background",
+      "paint": {
+        "background-color": "#f4efe8"
+      }
+    },
+    {
+      "id": "Landuse_Residential",
+      "type": "fill",
+      "source": "asit",
+      "source-layer": "landuse",
+      "filter": [
+        "all",
+        [
+          "==",
+          "objektart",
+          "Residential"
+        ]
+      ],
+      "paint": {
+        "fill-color": "#EAE4DD",
+        "fill-opacity": {
+          "stops": [
+            [
+              7,
+              0
+            ],
+            [
+              12,
+              1
+            ],
+            [
+              14,
+              0
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Landuse_Parks",
+      "type": "fill",
+      "source": "asit",
+      "source-layer": "landuse",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "Golfplatzareal",
+          "Oeffentliches Parkareal",
+          "Pferderennbahnareal",
+          "Schrebergartenareal",
+          "Schwimmbadareal",
+          "Sportplatzareal",
+          "Zooareal",
+          "Standplatzareal",
+          "Campingplatzareal"
+        ]
+      ],
+      "paint": {
+        "fill-color": "#cbd8a7"
+      }
+    },
+    {
+      "id": "Landuse_Crops",
+      "type": "fill",
+      "source": "asit",
+      "source-layer": "landuse",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "Baumschule",
+          "Obstanlage",
+          "Reben"
+        ]
+      ],
+      "paint": {
+        "fill-color": "#DEE6C6"
+      }
+    },
+    {
+      "id": "Landuse_Quarry",
+      "type": "fill",
+      "source": "asit",
+      "source-layer": "landuse",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "Abbauareal"
+        ]
+      ],
+      "paint": {
+        "fill-color": "#F3F5F7",
+        "fill-antialias": true,
+        "fill-outline-color": "#B6C2CE"
+      }
+    },
+    {
+      "id": "Landuse_Hospital",
+      "type": "fill",
+      "source": "asit",
+      "source-layer": "landuse",
+      "minzoom": 13,
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "Spitalareal"
+        ]
+      ],
+      "paint": {
+        "fill-color": "#fff0f3",
+        "fill-antialias": true,
+        "fill-outline-color": "#ffb3c1"
+      }
+    },
+    {
+      "id": "Landcover_Rock",
+      "type": "fill",
+      "source": "asit",
+      "source-layer": "landcover",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "Fels",
+          "Felsbloecke",
+          "Lockergestein"
+        ]
+      ],
+      "paint": {
+        "fill-color": "hsl(0, 0%, 90%)"
+      }
+    },
+    {
+      "id": "Landcover_Ice",
+      "type": "fill",
+      "source": "asit",
+      "source-layer": "landcover",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "Gletscher",
+          "Schneefeld Toteis"
+        ]
+      ],
+      "paint": {
+        "fill-color": "#ECFDFA"
+      }
+    },
+    {
+      "id": "Landcover_Bush",
+      "type": "fill",
+      "source": "asit",
+      "source-layer": "landcover",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "Gebueschwald",
+          "Wald offen"
+        ]
+      ],
+      "paint": {
+        "fill-color": "#cbd9a8",
+        "fill-opacity": 1,
+        "fill-antialias": false
+      }
+    },
+    {
+      "id": "Landcover_Wood",
+      "type": "fill",
+      "source": "asit",
+      "source-layer": "landcover",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "Wald",
+          "Gehoelzflaeche"
+        ]
+      ],
+      "paint": {
+        "fill-color": "#cbd9a8",
+        "fill-opacity": 1,
+        "fill-antialias": false
+      }
+    },
+    {
+      "id": "Landcover_Wetland",
+      "type": "fill",
+      "source": "asit",
+      "source-layer": "landcover",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "Feuchtgebiet"
+        ]
+      ],
+      "paint": {
+        "fill-color": "#DAF6C8"
+      }
+    },
+    {
+      "id": "Landuse/outline_Parks",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "landuse",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "Golfplatzareal",
+          "Oeffentliches Parkareal",
+          "Pferderennbahnareal",
+          "Schrebergartenareal",
+          "Schwimmbadareal",
+          "Sportplatzareal",
+          "Zooareal",
+          "Standplatzareal",
+          "Campingplatzareale"
+        ]
+      ],
+      "paint": {
+        "line-color": "#BCCD8E"
+      }
+    },
+    {
+      "id": "Landuse/outline_Quarry",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "landuse",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "Abbauareal"
+        ]
+      ],
+      "paint": {
+        "line-color": "#B6C2CE"
+      }
+    },
+    {
+      "id": "Landuse/outline_Hospital",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "landuse",
+      "minzoom": 13,
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "Spitalareal"
+        ]
+      ],
+      "paint": {
+        "line-color": "#ffb3c1"
+      }
+    },
+    {
+      "id": "Landuse_Pitch",
+      "type": "fill",
+      "source": "asit",
+      "source-layer": "landuse",
+      "minzoom": 13,
+      "filter": [
+        "all",
+        [
+          "==",
+          "objektart",
+          "Sportplatz"
+        ]
+      ],
+      "paint": {
+        "fill-color": "#D5DFB9",
+        "fill-antialias": true,
+        "fill-outline-color": {
+          "stops": [
+            [
+              13,
+              "#C3D29D"
+            ],
+            [
+              15,
+              "#B3C581"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Waterway_River",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "waterway",
+      "filter": [
+        "all",
+        [
+          "==",
+          "verlauf",
+          "above_ground"
+        ],
+        [
+          "==",
+          "objektart",
+          "river"
+        ]
+      ],
+      "layout": {
+        "line-cap": "round"
+      },
+      "paint": {
+        "line-color": "#8fc8f2",
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              11,
+              0.5
+            ],
+            [
+              21,
+              4
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Waterway_Penstock",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "waterway",
+      "minzoom": 11,
+      "filter": [
+        "all",
+        [
+          "==",
+          "objektart",
+          "penstock"
+        ]
+      ],
+      "layout": {
+        "line-cap": "round"
+      },
+      "paint": {
+        "line-color": "#8fc8f2",
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              11,
+              0.5
+            ],
+            [
+              21,
+              4
+            ]
+          ]
+        },
+        "line-dasharray": [
+          5,
+          5
+        ]
+      }
+    },
+    {
+      "id": "Waterway_River_bridge",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "waterway",
+      "filter": [
+        "all",
+        [
+          "==",
+          "verlauf",
+          "bridge"
+        ],
+        [
+          "==",
+          "objektart",
+          "river"
+        ]
+      ],
+      "layout": {
+        "line-cap": "round"
+      },
+      "paint": {
+        "line-color": "#8fc8f2",
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              11,
+              0.5
+            ],
+            [
+              21,
+              4
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Water",
+      "type": "fill",
+      "source": "asit",
+      "source-layer": "water",
+      "paint": {
+        "fill-color": "#8fc8f2"
+      }
+    },
+    {
+      "id": "Airport_Fill",
+      "type": "fill",
+      "source": "asit",
+      "source-layer": "airport",
+      "paint": {
+        "fill-color": "#fff"
+      }
+    },
+    {
+      "id": "Airport_Outline",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "airport",
+      "paint": {
+        "line-color": "#778da9",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              12,
+              0.2
+            ],
+            [
+              14,
+              1
+            ],
+            [
+              21,
+              3
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Tunnel_Highway_Ramp",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "Ausfahrt",
+          "Einfahrt",
+          "Zufahrt"
+        ],
+        [
+          "<",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#9EA4BD",
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              5,
+              1
+            ],
+            [
+              21,
+              4
+            ]
+          ]
+        },
+        "line-dasharray": [
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "id": "Tunnel_Path-1m",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "1m_Weg",
+          "1m_Wegfragment"
+        ],
+        [
+          "<",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#fff",
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              14,
+              1
+            ],
+            [
+              21,
+              4
+            ]
+          ]
+        },
+        "line-dasharray": [
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "id": "Tunnel_Path-2m",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "2m_Weg",
+          "2m_Wegfragment"
+        ],
+        [
+          "<",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#BFA088",
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              14,
+              1
+            ],
+            [
+              21,
+              4
+            ]
+          ]
+        },
+        "line-dasharray": [
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "id": "Tunnel_3m",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "==",
+          "objektart",
+          "3m_Strasse"
+        ],
+        [
+          "<",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#BFA088",
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              7,
+              1
+            ],
+            [
+              21,
+              4
+            ]
+          ]
+        },
+        "line-dasharray": [
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "id": "Tunnel_4m",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "4m_Strasse",
+          "Dienstzufahrt",
+          "Raststaette"
+        ],
+        [
+          "<",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#BFA088",
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              7,
+              1
+            ],
+            [
+              21,
+              4
+            ]
+          ]
+        },
+        "line-dasharray": [
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "id": "Tunnel_6m",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "==",
+          "objektart",
+          "6m_Strasse"
+        ],
+        [
+          "<",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#BFA088",
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              7,
+              1
+            ],
+            [
+              21,
+              4
+            ]
+          ]
+        },
+        "line-dasharray": [
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "id": "Tunnel_8m",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "==",
+          "objektart",
+          "8m_Strasse"
+        ],
+        [
+          "<",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#BFA088",
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              7,
+              1
+            ],
+            [
+              21,
+              4
+            ]
+          ]
+        },
+        "line-dasharray": [
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "id": "Tunnel_10m",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "==",
+          "objektart",
+          "10m_Strasse"
+        ],
+        [
+          "<",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#BFA088",
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              7,
+              1
+            ],
+            [
+              21,
+              4
+            ]
+          ]
+        },
+        "line-dasharray": [
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "id": "Tunnel_Highway",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "Autobahn",
+          "Autostrasse"
+        ],
+        [
+          "<",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#9EA4BD",
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              5,
+              1
+            ],
+            [
+              21,
+              4
+            ]
+          ]
+        },
+        "line-dasharray": [
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "id": "Railway_Tunnel",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "railway",
+      "filter": [
+        "all",
+        [
+          "<",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#BFA088",
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              8,
+              0.8
+            ],
+            [
+              13,
+              0.8
+            ],
+            [
+              21,
+              4
+            ]
+          ]
+        },
+        "line-dasharray": [
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "id": "Building_Underground",
+      "type": "fill",
+      "source": "asit",
+      "source-layer": "building",
+      "layout": {
+        "visibility": "none"
+      },
+      "filter": [
+        "all",
+        [
+          "==",
+          "underground",
+          true
+        ]
+      ],
+      "paint": {
+        "fill-color": {
+          "stops": [
+            [
+              12,
+              "#D8E0E9"
+            ],
+            [
+              14,
+              "#E5EAF0"
+            ]
+          ]
+        },
+        "fill-outline-color": {
+          "stops": [
+            [
+              15,
+              "transparent"
+            ],
+            [
+              16,
+              "#8A9FBC"
+            ]
+          ]
+        },
+        "fill-antialias": true
+      }
+    },
+    {
+      "id": "Railway_Platform",
+      "type": "fill",
+      "source": "asit",
+      "source-layer": "railway_platform",
+      "minzoom": 15,
+      "paint": {
+        "fill-color": "#e0d7d1",
+        "fill-opacity": 0.7
+      }
+    },
+    {
+      "id": "Street_Highway_Ramp_Casing",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "Einfahrt",
+          "Ausfahrt",
+          "Zufahrt"
+        ],
+        [
+          "==",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#7982A4",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              5,
+              0
+            ],
+            [
+              7,
+              0.9
+            ],
+            [
+              9,
+              2
+            ],
+            [
+              11,
+              2.8
+            ],
+            [
+              21,
+              141
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Street_Path-2m_Casing",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "2m_Weg",
+          "2m_Wegfragment"
+        ],
+        [
+          "==",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#BFA088",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              11,
+              0.9
+            ],
+            [
+              21,
+              57
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Street_3m_Casing",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "==",
+          "objektart",
+          "3m_Strasse"
+        ],
+        [
+          "==",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#BFA088",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              7,
+              0.45
+            ],
+            [
+              9,
+              0.6
+            ],
+            [
+              11,
+              1.35
+            ],
+            [
+              21,
+              85
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Street_4m_Casing",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "4m_Strasse",
+          "Dienstzufahrt",
+          "Raststaette"
+        ],
+        [
+          "==",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#BFA088",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              7,
+              0.6
+            ],
+            [
+              9,
+              0.8
+            ],
+            [
+              11,
+              1.8
+            ],
+            [
+              21,
+              115
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Street_6m_Casing",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "6m_Strasse"
+        ],
+        [
+          "==",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#BFA088",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              7,
+              1
+            ],
+            [
+              9,
+              1.4
+            ],
+            [
+              11,
+              2.8
+            ],
+            [
+              21,
+              170
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Street_8m_Casing",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "==",
+          "objektart",
+          "8m_Strasse"
+        ],
+        [
+          "==",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#BFA088",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              7,
+              1.2
+            ],
+            [
+              9,
+              1.6
+            ],
+            [
+              11,
+              3
+            ],
+            [
+              21,
+              228
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Street_10m_Casing",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "==",
+          "objektart",
+          "10m_Strasse"
+        ],
+        [
+          "==",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#BFA088",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              7,
+              1.5
+            ],
+            [
+              9,
+              2
+            ],
+            [
+              11,
+              3.8
+            ],
+            [
+              21,
+              285
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Street_Highway_Casing",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "Autobahn",
+          "Autostrasse"
+        ],
+        [
+          "==",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#7982A4",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              5,
+              0
+            ],
+            [
+              7,
+              1.25
+            ],
+            [
+              9,
+              2.25
+            ],
+            [
+              11,
+              4
+            ],
+            [
+              21,
+              340
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Street_Parking_Fill",
+      "type": "fill",
+      "source": "asit",
+      "source-layer": "parking",
+      "minzoom": 13,
+      "paint": {
+        "fill-color": "#fff"
+      }
+    },
+    {
+      "id": "Street_Parking_Outline",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "parking",
+      "minzoom": 13,
+      "paint": {
+        "line-color": "#BFA088",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              13,
+              0.2
+            ],
+            [
+              21,
+              3
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Street_Highway_Ramp",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "Ausfahrt",
+          "Einfahrt",
+          "Zufahrt"
+        ],
+        [
+          "==",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#9EA4BD",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              5,
+              0
+            ],
+            [
+              7,
+              0.7
+            ],
+            [
+              9,
+              1
+            ],
+            [
+              11,
+              2.1
+            ],
+            [
+              21,
+              140
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Street_Path-1m",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "1m_Weg",
+          "1m_Wegfragment"
+        ],
+        [
+          "==",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#fff",
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              14,
+              1
+            ],
+            [
+              21,
+              4
+            ]
+          ]
+        },
+        "line-dasharray": [
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "id": "Street_Path-2m",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "2m_Weg",
+          "2m_Wegfragment"
+        ],
+        [
+          "==",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#fff",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              7,
+              0.2
+            ],
+            [
+              9,
+              0.3
+            ],
+            [
+              11,
+              0.6
+            ],
+            [
+              21,
+              52
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Street_3m",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "==",
+          "objektart",
+          "3m_Strasse"
+        ],
+        [
+          "==",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#fff",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              7,
+              0.3
+            ],
+            [
+              9,
+              0.45
+            ],
+            [
+              11,
+              0.9
+            ],
+            [
+              21,
+              80
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Street_4m",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "4m_Strasse",
+          "Dienstzufahrt",
+          "Raststaette"
+        ],
+        [
+          "==",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#fff",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              7,
+              0.4
+            ],
+            [
+              9,
+              0.6
+            ],
+            [
+              11,
+              1.2
+            ],
+            [
+              21,
+              110
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Street_6m",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "6m_Strasse"
+        ],
+        [
+          "==",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#fff",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              7,
+              0.7
+            ],
+            [
+              9,
+              1
+            ],
+            [
+              11,
+              2.1
+            ],
+            [
+              21,
+              165
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Street_8m",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "==",
+          "objektart",
+          "8m_Strasse"
+        ],
+        [
+          "==",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#fff",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              7,
+              0.8
+            ],
+            [
+              9,
+              1.2
+            ],
+            [
+              11,
+              2.4
+            ],
+            [
+              21,
+              224
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Street_10m",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "==",
+          "objektart",
+          "10m_Strasse"
+        ],
+        [
+          "==",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#fff",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              7,
+              1
+            ],
+            [
+              9,
+              1.5
+            ],
+            [
+              11,
+              3
+            ],
+            [
+              21,
+              280
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Street_Highway",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "Autobahn",
+          "Autostrasse"
+        ],
+        [
+          "==",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#9EA4BD",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              5,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              9,
+              1.5
+            ],
+            [
+              11,
+              3
+            ],
+            [
+              21,
+              339
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Railway",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "railway",
+      "filter": [
+        "all",
+        [
+          "==",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#BFA088",
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              8,
+              0.8
+            ],
+            [
+              13,
+              0.8
+            ],
+            [
+              21,
+              4
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Building",
+      "type": "fill",
+      "source": "asit",
+      "source-layer": "building",
+      "filter": [
+        "all",
+        [
+          "==",
+          "underground",
+          false
+        ]
+      ],
+      "paint": {
+        "fill-color": {
+          "stops": [
+            [
+              12,
+              "#DFD5CD"
+            ],
+            [
+              14,
+              "#cfbeb2"
+            ]
+          ]
+        },
+        "fill-outline-color": {
+          "stops": [
+            [
+              15,
+              "transparent"
+            ],
+            [
+              16,
+              "#B8A08E"
+            ]
+          ]
+        },
+        "fill-antialias": true
+      }
+    },
+    {
+      "id": "Bridge_Highway_Ramp_Casing",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "Einfahrt",
+          "Ausfahrt",
+          "Zufahrt"
+        ],
+        [
+          ">",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#7982A4",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              5,
+              0
+            ],
+            [
+              7,
+              0.9
+            ],
+            [
+              9,
+              2
+            ],
+            [
+              11,
+              2.8
+            ],
+            [
+              21,
+              141
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Bridge_Path-2m_Casing",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "2m_Weg",
+          "2m_Wegfragment"
+        ],
+        [
+          ">",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#BFA088",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              11,
+              0.9
+            ],
+            [
+              21,
+              57
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Bridge_3m_Casing",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "==",
+          "objektart",
+          "3m_Strasse"
+        ],
+        [
+          ">",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#BFA088",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              7,
+              0.45
+            ],
+            [
+              9,
+              0.6
+            ],
+            [
+              11,
+              1.35
+            ],
+            [
+              21,
+              85
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Bridge_4m_Casing",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "4m_Strasse",
+          "Dienstzufahrt",
+          "Raststaette"
+        ],
+        [
+          ">",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#BFA088",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              7,
+              0.6
+            ],
+            [
+              9,
+              0.8
+            ],
+            [
+              11,
+              1.8
+            ],
+            [
+              21,
+              115
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Bridge_6m_Casing",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "6m_Strasse"
+        ],
+        [
+          ">",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#BFA088",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              7,
+              1
+            ],
+            [
+              9,
+              1.4
+            ],
+            [
+              11,
+              2.8
+            ],
+            [
+              21,
+              170
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Bridge_8m_Casing",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "==",
+          "objektart",
+          "8m_Strasse"
+        ],
+        [
+          ">",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#BFA088",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              7,
+              1.2
+            ],
+            [
+              9,
+              1.6
+            ],
+            [
+              11,
+              3
+            ],
+            [
+              21,
+              228
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Bridge_10m_Casing",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "==",
+          "objektart",
+          "10m_Strasse"
+        ],
+        [
+          ">",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#BFA088",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              7,
+              1.5
+            ],
+            [
+              9,
+              2
+            ],
+            [
+              11,
+              3.8
+            ],
+            [
+              21,
+              285
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Bridge_Highway_Casing",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "Autobahn",
+          "Autostrasse"
+        ],
+        [
+          ">",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#7982A4",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              5,
+              0
+            ],
+            [
+              7,
+              1.25
+            ],
+            [
+              9,
+              2.25
+            ],
+            [
+              11,
+              4
+            ],
+            [
+              21,
+              340
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Bridge_Highway_Ramp",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "Ausfahrt",
+          "Einfahrt",
+          "Zufahrt"
+        ],
+        [
+          ">",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#9EA4BD",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              5,
+              0
+            ],
+            [
+              7,
+              0.7
+            ],
+            [
+              9,
+              1
+            ],
+            [
+              11,
+              2.1
+            ],
+            [
+              21,
+              140
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Bridge_Path-1m",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "1m_Weg",
+          "1m_Wegfragment"
+        ],
+        [
+          ">",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#fff",
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              14,
+              1
+            ],
+            [
+              21,
+              4
+            ]
+          ]
+        },
+        "line-dasharray": [
+          2,
+          2
+        ]
+      }
+    },
+    {
+      "id": "Bridge_Path-2m",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "2m_Weg",
+          "2m_Wegfragment"
+        ],
+        [
+          ">",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#fff",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              7,
+              0.2
+            ],
+            [
+              9,
+              0.3
+            ],
+            [
+              11,
+              0.6
+            ],
+            [
+              21,
+              52
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Bridge_3m",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "==",
+          "objektart",
+          "3m_Strasse"
+        ],
+        [
+          ">",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#fff",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              7,
+              0.3
+            ],
+            [
+              9,
+              0.45
+            ],
+            [
+              11,
+              0.9
+            ],
+            [
+              21,
+              80
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Bridge_4m",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "4m_Strasse",
+          "Dienstzufahrt",
+          "Raststaette"
+        ],
+        [
+          ">",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#fff",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              7,
+              0.4
+            ],
+            [
+              9,
+              0.6
+            ],
+            [
+              11,
+              1.2
+            ],
+            [
+              21,
+              110
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Bridge_6m",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "6m_Strasse"
+        ],
+        [
+          ">",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#fff",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              7,
+              0.7
+            ],
+            [
+              9,
+              1
+            ],
+            [
+              11,
+              2.1
+            ],
+            [
+              21,
+              165
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Bridge_8m",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "==",
+          "objektart",
+          "8m_Strasse"
+        ],
+        [
+          ">",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#fff",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              7,
+              0.8
+            ],
+            [
+              9,
+              1.2
+            ],
+            [
+              11,
+              2.4
+            ],
+            [
+              21,
+              224
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Bridge_10m",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "==",
+          "objektart",
+          "10m_Strasse"
+        ],
+        [
+          ">",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#fff",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              7,
+              1
+            ],
+            [
+              9,
+              1.5
+            ],
+            [
+              11,
+              3
+            ],
+            [
+              21,
+              280
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Bridge_Highway",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "street",
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "Autobahn",
+          "Autostrasse"
+        ],
+        [
+          ">",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#9EA4BD",
+        "line-width": {
+          "base": 2,
+          "stops": [
+            [
+              5,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              9,
+              1.5
+            ],
+            [
+              11,
+              3
+            ],
+            [
+              21,
+              339
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Railway_Bridge",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "railway",
+      "filter": [
+        "all",
+        [
+          ">",
+          "stufe",
+          0
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#BFA088",
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              8,
+              0.8
+            ],
+            [
+              13,
+              0.8
+            ],
+            [
+              21,
+              4
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Boundary_Canton",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "boundary",
+      "minzoom": 7,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "Kanton"
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "rgb(120, 120, 120)",
+        "line-opacity": 0.6,
+        "line-width": {
+          "stops": [
+            [
+              7,
+              0.4
+            ],
+            [
+              12,
+              1.2
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Boundary_Country",
+      "type": "line",
+      "source": "asit",
+      "source-layer": "boundary",
+      "filter": [
+        "all",
+        [
+          "==",
+          "objektart",
+          "Land"
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#A6B0C1",
+        "line-opacity": {
+          "stops": [
+            [
+              0,
+              0
+            ],
+            [
+              4,
+              1
+            ]
+          ]
+        },
+        "line-width": {
+          "stops": [
+            [
+              6,
+              1
+            ],
+            [
+              12,
+              3
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "Place_Locality",
+      "type": "symbol",
+      "source": "asit",
+      "source-layer": "place",
+      "minzoom": 16,
+      "maxzoom": 18,
+      "filter": [
+        "all",
+        [
+          "in",
+          "objektart",
+          "Flurname swisstopo",
+          "Lokalname swisstopo"
+        ]
+      ],
+      "layout": {
+        "symbol-placement": "point",
+        "text-font": [
+          "Fira Sans Extra Condensed Italic"
+        ],
+        "text-anchor": "center",
+        "text-field": "{name}",
+        "text-size": {
+          "base": 1.2,
+          "stops": [
+            [
+              15,
+              12
+            ],
+            [
+              17,
+              14
+            ]
+          ]
+        }
+      },
+      "paint": {
+        "text-color": "#566D8A",
+        "text-halo-blur": 0.5,
+        "text-halo-width": 1,
+        "text-halo-color": "#fff"
+      }
+    },
+    {
+      "id": "Waterway_Name",
+      "type": "symbol",
+      "source": "asit",
+      "source-layer": "waterway",
+      "minzoom": 11,
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-sort-key": [
+          "to-number",
+          [
+            "get",
+            "rank"
+          ]
+        ],
+        "symbol-spacing": {
+          "base": 1,
+          "stops": [
+            [
+              11,
+              200
+            ],
+            [
+              21,
+              500
+            ]
+          ]
+        },
+        "text-font": [
+          "Fira Sans Condensed Regular"
+        ],
+        "text-field": "{name}",
+        "text-size": 12
+      },
+      "paint": {
+        "text-color": "#1A8BDB",
+        "text-halo-blur": 0.5,
+        "text-halo-width": 1.5,
+        "text-halo-color": "#fff",
+        "text-opacity": [
+          "step",
+          [
+            "zoom"
+          ],
+          0,
+          11,
+          [
+            "case",
+            [
+              "<",
+              [
+                "get",
+                "rank"
+              ],
+              -100000
+            ],
+            1,
+            0
+          ],
+          12,
+          [
+            "case",
+            [
+              "<",
+              [
+                "get",
+                "rank"
+              ],
+              -25000
+            ],
+            1,
+            0
+          ],
+          14,
+          [
+            "case",
+            [
+              "<",
+              [
+                "get",
+                "rank"
+              ],
+              -7000
+            ],
+            1,
+            0
+          ],
+          15,
+          1
+        ]
+      }
+    },
+    {
+      "id": "Water_Name",
+      "type": "symbol",
+      "source": "asit",
+      "source-layer": "water",
+      "minzoom": 9,
+      "layout": {
+        "symbol-placement": "point",
+        "symbol-sort-key": [
+          "to-number",
+          [
+            "get",
+            "rank"
+          ]
+        ],
+        "text-font": [
+          "Fira Sans Condensed Regular"
+        ],
+        "text-anchor": "center",
+        "text-field": "{name}",
+        "text-size": {
+          "stops": [
+            [
+              10,
+              12
+            ],
+            [
+              21,
+              16
+            ]
+          ]
+        },
+        "text-padding": 25
+      },
+      "paint": {
+        "text-color": "#1A8BDB",
+        "text-halo-blur": 0.5,
+        "text-halo-width": 1.5,
+        "text-halo-color": "#fff",
+        "text-opacity": [
+          "step",
+          [
+            "zoom"
+          ],
+          0,
+          9,
+          [
+            "case",
+            [
+              "<",
+              [
+                "get",
+                "rank"
+              ],
+              -40000000
+            ],
+            1,
+            0
+          ],
+          10,
+          [
+            "case",
+            [
+              "<",
+              [
+                "get",
+                "rank"
+              ],
+              -10000000
+            ],
+            1,
+            0
+          ],
+          11,
+          [
+            "case",
+            [
+              "<",
+              [
+                "get",
+                "rank"
+              ],
+              -2500000
+            ],
+            1,
+            0
+          ],
+          12,
+          [
+            "case",
+            [
+              "<",
+              [
+                "get",
+                "rank"
+              ],
+              -625000
+            ],
+            1,
+            0
+          ],
+          13,
+          [
+            "case",
+            [
+              "<",
+              [
+                "get",
+                "rank"
+              ],
+              -150000
+            ],
+            1,
+            0
+          ],
+          14,
+          1
+        ]
+      }
+    },
+    {
+      "id": "street_name",
+      "type": "symbol",
+      "source": "asit",
+      "source-layer": "street",
+      "layout": {
+        "symbol-placement": "line",
+        "symbol-spacing": {
+          "base": 1,
+          "stops": [
+            [
+              14,
+              100
+            ],
+            [
+              21,
+              500
+            ]
+          ]
+        },
+        "text-font": [
+          "Fira Sans Condensed Regular"
+        ],
+        "text-anchor": "center",
+        "text-field": "{name}",
+        "text-size": {
+          "base": 1,
+          "stops": [
+            [
+              14,
+              10
+            ],
+            [
+              21,
+              14
+            ]
+          ]
+        }
+      },
+      "paint": {
+        "text-color": "#2d3142",
+        "text-halo-blur": 0.5,
+        "text-halo-width": 2,
+        "text-halo-color": "#fff"
+      }
+    },
+    {
+      "id": "street_address_number",
+      "type": "symbol",
+      "source": "asit",
+      "source-layer": "address",
+      "minzoom": 17,
+      "layout": {
+        "symbol-placement": "point",
+        "text-field": "{adr_number}",
+        "text-font": [
+          "Fira Sans Condensed Medium"
+        ],
+        "text-anchor": "center",
+        "text-rotate": [
+          "to-number",
+          [
+            "get",
+            "orientation"
+          ]
+        ],
+        "text-size": {
+          "base": 1,
+          "stops": [
+            [
+              17,
+              12
+            ],
+            [
+              21,
+              16
+            ]
+          ]
+        }
+      },
+      "paint": {
+        "text-color": "#584437",
+        "text-halo-blur": 0.5,
+        "text-halo-width": 1,
+        "text-halo-color": "#fff"
+      }
+    },
+    {
+      "id": "Place_Hamlet",
+      "type": "symbol",
+      "source": "asit",
+      "source-layer": "place",
+      "maxzoom": 17,
+      "filter": [
+        "all",
+        [
+          "==",
+          "objektart",
+          "Ort"
+        ],
+        [
+          "!in",
+          "pop_cat",
+          "1'000 bis 1'999",
+          "2'000 bis 9'999",
+          "10'000 bis 49'999",
+          "50'000 bis 100'000",
+          "> 100'000"
+        ]
+      ],
+      "layout": {
+        "symbol-placement": "point",
+        "symbol-sort-key": [
+          "to-number",
+          [
+            "get",
+            "rank"
+          ]
+        ],
+        "text-font": [
+          "Fira Sans Condensed Regular"
+        ],
+        "text-anchor": "center",
+        "text-field": "{name}",
+        "text-size": {
+          "base": 1.2,
+          "stops": [
+            [
+              12,
+              12
+            ],
+            [
+              17,
+              16
+            ]
+          ]
+        }
+      },
+      "paint": {
+        "text-color": "#313549",
+        "text-halo-blur": 0.5,
+        "text-halo-width": 1.5,
+        "text-halo-color": "#fff"
+      }
+    },
+    {
+      "id": "Place_Village",
+      "type": "symbol",
+      "source": "asit",
+      "source-layer": "place",
+      "maxzoom": 17,
+      "filter": [
+        "all",
+        [
+          "==",
+          "objektart",
+          "Ort"
+        ],
+        [
+          "in",
+          "pop_cat",
+          "1'000 bis 1'999",
+          "2'000 bis 9'999"
+        ]
+      ],
+      "layout": {
+        "symbol-placement": "point",
+        "symbol-sort-key": [
+          "to-number",
+          [
+            "get",
+            "rank"
+          ]
+        ],
+        "text-font": [
+          "Fira Sans Condensed Medium"
+        ],
+        "text-anchor": "center",
+        "text-field": "{name}",
+        "text-size": {
+          "base": 1.2,
+          "stops": [
+            [
+              10,
+              12
+            ],
+            [
+              17,
+              20
+            ]
+          ]
+        }
+      },
+      "paint": {
+        "text-color": {
+          "base": 1,
+          "stops": [
+            [
+              10,
+              "#6D759C"
+            ],
+            [
+              13,
+              "#313549"
+            ]
+          ]
+        },
+        "text-halo-blur": 0.5,
+        "text-halo-width": 1.5,
+        "text-halo-color": "#fff"
+      }
+    },
+    {
+      "id": "Place_Town",
+      "type": "symbol",
+      "source": "asit",
+      "source-layer": "place",
+      "maxzoom": 15,
+      "filter": [
+        "all",
+        [
+          "==",
+          "objektart",
+          "Ort"
+        ],
+        [
+          "in",
+          "pop_cat",
+          "10'000 bis 49'999"
+        ]
+      ],
+      "layout": {
+        "symbol-placement": "point",
+        "symbol-sort-key": [
+          "to-number",
+          [
+            "get",
+            "rank"
+          ]
+        ],
+        "text-font": [
+          "Fira Sans Condensed Regular"
+        ],
+        "text-anchor": "center",
+        "text-field": "{name}",
+        "text-size": {
+          "base": 1.2,
+          "stops": [
+            [
+              7,
+              12
+            ],
+            [
+              15,
+              24
+            ]
+          ]
+        }
+      },
+      "paint": {
+        "text-color": "#212431",
+        "text-halo-blur": 0.5,
+        "text-halo-width": 1.5,
+        "text-halo-color": "#fff"
+      }
+    },
+    {
+      "id": "Place_Town-big",
+      "type": "symbol",
+      "source": "asit",
+      "source-layer": "place",
+      "maxzoom": 15,
+      "filter": [
+        "all",
+        [
+          "==",
+          "objektart",
+          "Ort"
+        ],
+        [
+          "in",
+          "pop_cat",
+          "50'000 bis 100'000"
+        ]
+      ],
+      "layout": {
+        "symbol-placement": "point",
+        "symbol-sort-key": [
+          "to-number",
+          [
+            "get",
+            "rank"
+          ]
+        ],
+        "text-font": [
+          "Fira Sans Condensed Regular"
+        ],
+        "text-anchor": "center",
+        "text-field": "{name}",
+        "text-size": {
+          "base": 1.2,
+          "stops": [
+            [
+              6,
+              12
+            ],
+            [
+              11,
+              20
+            ]
+          ]
+        }
+      },
+      "paint": {
+        "text-color": "#212431",
+        "text-halo-blur": 0.5,
+        "text-halo-width": 1.5,
+        "text-halo-color": "#fff"
+      }
+    },
+    {
+      "id": "Place_City",
+      "type": "symbol",
+      "source": "asit",
+      "source-layer": "place",
+      "maxzoom": 14,
+      "filter": [
+        "all",
+        [
+          "==",
+          "objektart",
+          "Ort"
+        ],
+        [
+          "==",
+          "pop_cat",
+          "> 100'000"
+        ]
+      ],
+      "layout": {
+        "symbol-placement": "point",
+        "symbol-sort-key": [
+          "to-number",
+          [
+            "get",
+            "rank"
+          ]
+        ],
+        "text-font": [
+          "Fira Sans Condensed Regular"
+        ],
+        "text-anchor": "center",
+        "text-field": "{name}",
+        "text-size": {
+          "base": 1.2,
+          "stops": [
+            [
+              4,
+              12
+            ],
+            [
+              11,
+              24
+            ]
+          ]
+        }
+      },
+      "paint": {
+        "text-color": "#212431",
+        "text-halo-blur": 0.5,
+        "text-halo-width": 1.5,
+        "text-halo-color": "#fff"
+      }
+    }
+  ]
+}

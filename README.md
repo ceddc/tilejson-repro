@@ -1,21 +1,34 @@
-# TileJSON Repro
+# ArcGIS JS API 5.0 Style Repro
 
 Minimal repro for loading vector tiles with ArcGIS Maps SDK for JavaScript `5.0`.
 
 Modes:
 - `ASIT remote style`
+- `ASIT no relief`
 - `CH basemap style`
 - `CH basemap Pro lite`
+- `CH data check`
 - `ASIT TileJSON`
 
 URLs used:
 - ASIT style: `https://vt.asit-asso.ch/styles/asit.color/style.json`
 - ASIT TileJSON: `https://vt.asit-asso.ch/tiles/asit/v0.1/3857/tiles.json`
+- local ASIT no-relief style: `./asit.color.no-relief.style.json`
 - swisstopo style: `https://vectortiles.geo.admin.ch/styles/ch.swisstopo.basemap.vt/style.json`
 - swisstopo TileJSON shown in the panel: `https://vectortiles.geo.admin.ch/tiles/ch.swisstopo.base.vt/v1.0.0/tiles.json`
 - local Pro-lite style: `./swisstopo.basemap.pro-lite.style.json`
+- local data-check style: `./swisstopo.basemap.data-check.style.json`
 
 `style.json` is the useful cartographic repro. `TileJSON` is the raw source-only repro.
+
+## ASIT no relief
+
+`ASIT no relief` is a checked-in local copy of the ASIT color style with only two changes:
+
+- removed the `relief` raster source
+- removed the `Hillshade` raster layer that used that source
+
+Everything else is left as-is. This is the closest possible ASIT comparison when testing whether ArcGIS Pro rejects the style because of the secondary raster source.
 
 ## CH basemap Pro lite
 
@@ -38,6 +51,25 @@ Adaptations made in the simple style:
 - kept only text label properties such as `text-field`, `text-font`, `text-size`, `text-anchor`, `text-offset`, and halo/color settings
 - preserved layer `filter`, `minzoom`, and `maxzoom` where they existed
 
+## CH data check
+
+`CH data check` is an even simpler diagnostic style. It uses only the base TileJSON source and a handful of flat-color `fill` and `line` layers with no labels, icons, filters, or expressions.
+
+Layers included in the data-check style:
+
+- `landcover`
+- `landuse`
+- `water`
+- `bathymetry`
+- `construct`
+- `aeroway`
+- `building`
+- `building_ln`
+- `transportation`
+- `waterway`
+- `boundary`
+- `contour_line`
+
 ## Run
 
 Open `index.html` directly, or serve the folder:
@@ -51,9 +83,21 @@ Then open `http://localhost:8080/index.html`.
 
 Test `CH basemap Pro lite` over `http://localhost`, not `file:///`, because it loads a local JSON style file.
 
+`CH data check` should also be tested over `http://localhost`.
+
+`ASIT no relief` should also be tested over `http://localhost`.
+
+ASIT ArcGIS Pro test URL:
+
+`http://localhost:8080/asit.color.no-relief.style.json`
+
 ArcGIS Pro test URL:
 
 `http://localhost:8080/swisstopo.basemap.pro-lite.style.json`
+
+Diagnostic ArcGIS Pro test URL:
+
+`http://localhost:8080/swisstopo.basemap.data-check.style.json`
 
 ## Expected result
 

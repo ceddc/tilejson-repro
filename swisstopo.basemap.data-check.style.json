@@ -1,0 +1,197 @@
+{
+  "version": 8,
+  "name": "swisstopo-basemap-data-check",
+  "center": [
+    7.458556880930587,
+    46.959770261045776
+  ],
+  "zoom": 14.757125212752644,
+  "bearing": 0,
+  "pitch": 0,
+  "sources": {
+    "base_v1.0.0": {
+      "type": "vector",
+      "url": "https://vectortiles.geo.admin.ch/tiles/ch.swisstopo.base.vt/v1.0.0/tiles.json"
+    }
+  },
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "paint": {
+        "background-color": "#f7f5ef"
+      }
+    },
+    {
+      "id": "landcover-fill",
+      "type": "fill",
+      "source": "base_v1.0.0",
+      "source-layer": "landcover",
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-color": "#dcecc9",
+        "fill-opacity": 0.75
+      }
+    },
+    {
+      "id": "landuse-fill",
+      "type": "fill",
+      "source": "base_v1.0.0",
+      "source-layer": "landuse",
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-color": "#efe2bf",
+        "fill-opacity": 0.7
+      }
+    },
+    {
+      "id": "water-fill",
+      "type": "fill",
+      "source": "base_v1.0.0",
+      "source-layer": "water",
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-color": "#84c7f0",
+        "fill-opacity": 0.95
+      }
+    },
+    {
+      "id": "bathymetry-fill",
+      "type": "fill",
+      "source": "base_v1.0.0",
+      "source-layer": "bathymetry",
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-color": "#5ba9de",
+        "fill-opacity": 0.45
+      }
+    },
+    {
+      "id": "construct-fill",
+      "type": "fill",
+      "source": "base_v1.0.0",
+      "source-layer": "construct",
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-color": "#f2d1ae",
+        "fill-opacity": 0.75
+      }
+    },
+    {
+      "id": "aeroway-fill",
+      "type": "fill",
+      "source": "base_v1.0.0",
+      "source-layer": "aeroway",
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-color": "#d8d8d8",
+        "fill-opacity": 0.7
+      }
+    },
+    {
+      "id": "building-fill",
+      "type": "fill",
+      "source": "base_v1.0.0",
+      "source-layer": "building",
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-color": "#cc8f7a",
+        "fill-opacity": 0.85
+      }
+    },
+    {
+      "id": "building-line",
+      "type": "line",
+      "source": "base_v1.0.0",
+      "source-layer": "building_ln",
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#7b4f46",
+        "line-width": 1,
+        "line-opacity": 0.95
+      }
+    },
+    {
+      "id": "transportation-line",
+      "type": "line",
+      "source": "base_v1.0.0",
+      "source-layer": "transportation",
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#4d5663",
+        "line-width": 1.4,
+        "line-opacity": 0.95
+      }
+    },
+    {
+      "id": "waterway-line",
+      "type": "line",
+      "source": "base_v1.0.0",
+      "source-layer": "waterway",
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#1a80c9",
+        "line-width": 1.6,
+        "line-opacity": 1
+      }
+    },
+    {
+      "id": "boundary-line",
+      "type": "line",
+      "source": "base_v1.0.0",
+      "source-layer": "boundary",
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#b03a48",
+        "line-width": 1.2,
+        "line-opacity": 0.9
+      }
+    },
+    {
+      "id": "contour-line",
+      "type": "line",
+      "source": "base_v1.0.0",
+      "source-layer": "contour_line",
+      "layout": {
+        "visibility": "visible",
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#aa8d65",
+        "line-width": 0.7,
+        "line-opacity": 0.55
+      }
+    }
+  ]
+}

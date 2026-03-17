@@ -107,8 +107,10 @@
     <div class="label">Mode</div>
     <div class="buttonRow" role="group" aria-label="Source mode">
       <button id="remoteStyleModeButton" class="modeButton" type="button" aria-pressed="true">ASIT remote style</button>
+      <button id="asitNoReliefModeButton" class="modeButton" type="button" aria-pressed="false">ASIT no relief</button>
       <button id="swisstopoStyleModeButton" class="modeButton" type="button" aria-pressed="false">CH basemap style</button>
       <button id="swisstopoProLiteModeButton" class="modeButton" type="button" aria-pressed="false">CH basemap Pro lite</button>
+      <button id="swisstopoDataCheckModeButton" class="modeButton" type="button" aria-pressed="false">CH data check</button>
       <button id="tileJsonModeButton" class="modeButton" type="button" aria-pressed="false">ASIT TileJSON</button>
     </div>
 
@@ -128,8 +130,10 @@
   </section>
   <script type="module">
     const remoteStyleUrl = "https://vt.asit-asso.ch/styles/asit.color/style.json";
+    const asitNoReliefStyleUrl = "./asit.color.no-relief.style.json";
     const swisstopoStyleUrl = "https://vectortiles.geo.admin.ch/styles/ch.swisstopo.basemap.vt/style.json";
     const swisstopoProLiteStyleUrl = "./swisstopo.basemap.pro-lite.style.json";
+    const swisstopoDataCheckStyleUrl = "./swisstopo.basemap.data-check.style.json";
     const swisstopoBaseTileJsonUrl = "https://vectortiles.geo.admin.ch/tiles/ch.swisstopo.base.vt/v1.0.0/tiles.json";
     const tileJsonUrl = "https://vt.asit-asso.ch/tiles/asit/v0.1/3857/tiles.json";
     const center = [7.4586, 46.9598];
@@ -143,6 +147,14 @@
         displayUrl: remoteStyleUrl,
         tileJsonDisplay: tileJsonUrl,
         note: "Loads the hosted ASIT style JSON and applies the ASIT cartography on top of the vector tiles from the TileJSON source below."
+      },
+      asitNoRelief: {
+        buttonId: "asitNoReliefModeButton",
+        label: "ASIT no relief",
+        runtimeUrl: asitNoReliefStyleUrl,
+        displayUrl: asitNoReliefStyleUrl,
+        tileJsonDisplay: tileJsonUrl,
+        note: "Loads a local copy of the ASIT color style with only the `relief` raster source and `Hillshade` raster layer removed. Use this to test whether ArcGIS Pro accepts the same ASIT style once the secondary raster source is gone. Serve this page over http://localhost for this mode."
       },
       swisstopoStyle: {
         buttonId: "swisstopoStyleModeButton",
@@ -159,6 +171,14 @@
         displayUrl: swisstopoProLiteStyleUrl,
         tileJsonDisplay: swisstopoBaseTileJsonUrl,
         note: "Loads the local swisstopo Pro-lite style: base source only, no relief, no sprite icons, text labels only, tuned for ArcGIS Pro testing. Serve this page over http://localhost for this mode."
+      },
+      swisstopoDataCheck: {
+        buttonId: "swisstopoDataCheckModeButton",
+        label: "CH data check",
+        runtimeUrl: swisstopoDataCheckStyleUrl,
+        displayUrl: swisstopoDataCheckStyleUrl,
+        tileJsonDisplay: swisstopoBaseTileJsonUrl,
+        note: "Loads a very simple local diagnostic style with flat fills and lines only, no labels, no icons, no filters, and no expressions. Use this to see whether ArcGIS Pro is drawing the base polygon and line data at all."
       },
       tilejson: {
         buttonId: "tileJsonModeButton",
@@ -178,8 +198,10 @@
     const statusMessageNode = document.getElementById("statusMessage");
     const modeButtons = {
       remoteStyle: document.getElementById("remoteStyleModeButton"),
+      asitNoRelief: document.getElementById("asitNoReliefModeButton"),
       swisstopoStyle: document.getElementById("swisstopoStyleModeButton"),
       swisstopoProLite: document.getElementById("swisstopoProLiteModeButton"),
+      swisstopoDataCheck: document.getElementById("swisstopoDataCheckModeButton"),
       tilejson: document.getElementById("tileJsonModeButton")
     };
 
@@ -316,6 +338,12 @@
           }
         });
 
+        modeButtons.asitNoRelief.addEventListener("click", () => {
+          if (currentMode !== "asitNoRelief") {
+            loadMode("asitNoRelief");
+          }
+        });
+
         modeButtons.swisstopoStyle.addEventListener("click", () => {
           if (currentMode !== "swisstopoStyle") {
             loadMode("swisstopoStyle");
@@ -325,6 +353,12 @@
         modeButtons.swisstopoProLite.addEventListener("click", () => {
           if (currentMode !== "swisstopoProLite") {
             loadMode("swisstopoProLite");
+          }
+        });
+
+        modeButtons.swisstopoDataCheck.addEventListener("click", () => {
+          if (currentMode !== "swisstopoDataCheck") {
+            loadMode("swisstopoDataCheck");
           }
         });
 
