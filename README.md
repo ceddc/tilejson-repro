@@ -9,6 +9,7 @@ Modes:
 - `CH basemap style`
 - `CH basemap Pro lite`
 - `CH data check`
+- `CH data + functions`
 - `ASIT TileJSON`
 
 URLs used:
@@ -21,6 +22,7 @@ URLs used:
 - swisstopo TileJSON shown in the panel: `https://vectortiles.geo.admin.ch/tiles/ch.swisstopo.base.vt/v1.0.0/tiles.json`
 - local Pro-lite style: `./swisstopo.basemap.pro-lite.style.json`
 - local data-check style: `./swisstopo.basemap.data-check.style.json`
+- local data + functions style: `./swisstopo.basemap.data-check.functions.style.json`
 
 `style.json` is the useful cartographic repro. `TileJSON` is the raw source-only repro.
 
@@ -83,6 +85,22 @@ Layers included in the data-check style:
 - `boundary`
 - `contour_line`
 
+## CH data + functions
+
+`CH data + functions` keeps the same working source-layer scope as `CH data check`, but restores the original swisstopo filters, expressions, colors, widths, and ordering for those fill and line layers.
+
+Adaptations in this style:
+
+- based on the working `CH data check` source-layer scope
+- reuses the original swisstopo fill and line layers for `aeroway`, `bathymetry`, `boundary`, `building`, `building_ln`, `construct`, `contour_line`, `landcover`, `landuse`, `transportation`, `water`, and `waterway`
+- restores the original swisstopo filters and expression-based paint/layout rules for those layers
+- still keeps only the base TileJSON source
+- still excludes relief layers and the relief source
+- still excludes all symbol layers and labels
+- still excludes sprite-dependent fill patterns
+
+This makes it a useful middle step between the very plain `CH data check` style and the fuller swisstopo styles.
+
 ## Run
 
 Open `index.html` directly, or serve the folder:
@@ -97,6 +115,8 @@ Then open `http://localhost:8080/index.html`.
 Test `CH basemap Pro lite` over `http://localhost`, not `file:///`, because it loads a local JSON style file.
 
 `CH data check` should also be tested over `http://localhost`.
+
+`CH data + functions` should also be tested over `http://localhost`.
 
 `ASIT no relief` should also be tested over `http://localhost`.
 
@@ -121,6 +141,10 @@ ArcGIS Pro test URL:
 Diagnostic ArcGIS Pro test URL:
 
 `http://localhost:8080/swisstopo.basemap.data-check.style.json`
+
+Functions ArcGIS Pro test URL:
+
+`http://localhost:8080/swisstopo.basemap.data-check.functions.style.json`
 
 ## Expected result
 
