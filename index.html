@@ -108,6 +108,7 @@
     <div class="buttonRow" role="group" aria-label="Source mode">
       <button id="remoteStyleModeButton" class="modeButton" type="button" aria-pressed="true">ASIT remote style</button>
       <button id="asitNoReliefModeButton" class="modeButton" type="button" aria-pressed="false">ASIT no relief</button>
+      <button id="asitNoReliefTileJson2ModeButton" class="modeButton" type="button" aria-pressed="false">ASIT no relief + TileJSON 2</button>
       <button id="swisstopoStyleModeButton" class="modeButton" type="button" aria-pressed="false">CH basemap style</button>
       <button id="swisstopoProLiteModeButton" class="modeButton" type="button" aria-pressed="false">CH basemap Pro lite</button>
       <button id="swisstopoDataCheckModeButton" class="modeButton" type="button" aria-pressed="false">CH data check</button>
@@ -131,6 +132,8 @@
   <script type="module">
     const remoteStyleUrl = "https://vt.asit-asso.ch/styles/asit.color/style.json";
     const asitNoReliefStyleUrl = "./asit.color.no-relief.style.json";
+    const asitTileJson2Url = "./asit.tiles.tilejson-2.0.json";
+    const asitNoReliefTileJson2StyleUrl = "./asit.color.no-relief.tilejson-2.0.style.json";
     const swisstopoStyleUrl = "https://vectortiles.geo.admin.ch/styles/ch.swisstopo.basemap.vt/style.json";
     const swisstopoProLiteStyleUrl = "./swisstopo.basemap.pro-lite.style.json";
     const swisstopoDataCheckStyleUrl = "./swisstopo.basemap.data-check.style.json";
@@ -155,6 +158,14 @@
         displayUrl: asitNoReliefStyleUrl,
         tileJsonDisplay: tileJsonUrl,
         note: "Loads a local copy of the ASIT color style with only the `relief` raster source and `Hillshade` raster layer removed. Use this to test whether ArcGIS Pro accepts the same ASIT style once the secondary raster source is gone. Serve this page over http://localhost for this mode."
+      },
+      asitNoReliefTileJson2: {
+        buttonId: "asitNoReliefTileJson2ModeButton",
+        label: "ASIT no relief + TileJSON 2",
+        runtimeUrl: asitNoReliefTileJson2StyleUrl,
+        displayUrl: asitNoReliefTileJson2StyleUrl,
+        tileJsonDisplay: asitTileJson2Url,
+        note: "Loads the same local ASIT no-relief style, but points it at a local TileJSON wrapper that only changes the advertised TileJSON version from 3.0.0 to 2.0.0. The actual vector tiles, bounds, and layer metadata stay the same. Serve this page over http://localhost for this mode."
       },
       swisstopoStyle: {
         buttonId: "swisstopoStyleModeButton",
@@ -199,6 +210,7 @@
     const modeButtons = {
       remoteStyle: document.getElementById("remoteStyleModeButton"),
       asitNoRelief: document.getElementById("asitNoReliefModeButton"),
+      asitNoReliefTileJson2: document.getElementById("asitNoReliefTileJson2ModeButton"),
       swisstopoStyle: document.getElementById("swisstopoStyleModeButton"),
       swisstopoProLite: document.getElementById("swisstopoProLiteModeButton"),
       swisstopoDataCheck: document.getElementById("swisstopoDataCheckModeButton"),
@@ -341,6 +353,12 @@
         modeButtons.asitNoRelief.addEventListener("click", () => {
           if (currentMode !== "asitNoRelief") {
             loadMode("asitNoRelief");
+          }
+        });
+
+        modeButtons.asitNoReliefTileJson2.addEventListener("click", () => {
+          if (currentMode !== "asitNoReliefTileJson2") {
+            loadMode("asitNoReliefTileJson2");
           }
         });
 

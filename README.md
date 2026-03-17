@@ -5,6 +5,7 @@ Minimal repro for loading vector tiles with ArcGIS Maps SDK for JavaScript `5.0`
 Modes:
 - `ASIT remote style`
 - `ASIT no relief`
+- `ASIT no relief + TileJSON 2`
 - `CH basemap style`
 - `CH basemap Pro lite`
 - `CH data check`
@@ -14,6 +15,8 @@ URLs used:
 - ASIT style: `https://vt.asit-asso.ch/styles/asit.color/style.json`
 - ASIT TileJSON: `https://vt.asit-asso.ch/tiles/asit/v0.1/3857/tiles.json`
 - local ASIT no-relief style: `./asit.color.no-relief.style.json`
+- local ASIT TileJSON 2 wrapper: `./asit.tiles.tilejson-2.0.json`
+- local ASIT no-relief TileJSON 2 style: `./asit.color.no-relief.tilejson-2.0.style.json`
 - swisstopo style: `https://vectortiles.geo.admin.ch/styles/ch.swisstopo.basemap.vt/style.json`
 - swisstopo TileJSON shown in the panel: `https://vectortiles.geo.admin.ch/tiles/ch.swisstopo.base.vt/v1.0.0/tiles.json`
 - local Pro-lite style: `./swisstopo.basemap.pro-lite.style.json`
@@ -29,6 +32,16 @@ URLs used:
 - removed the `Hillshade` raster layer that used that source
 
 Everything else is left as-is. This is the closest possible ASIT comparison when testing whether ArcGIS Pro rejects the style because of the secondary raster source.
+
+## ASIT TileJSON 2 wrapper
+
+`ASIT no relief + TileJSON 2` uses the same no-relief ASIT style, but points it at a local TileJSON wrapper.
+
+This wrapper changes only one thing:
+
+- `tilejson` is advertised as `2.0.0` instead of `3.0.0`
+
+The actual tile URLs, vector layers, bounds, min/max zoom, and styling stay the same. This isolates the TileJSON version metadata as a possible ArcGIS Pro compatibility issue.
 
 ## CH basemap Pro lite
 
@@ -87,9 +100,19 @@ Test `CH basemap Pro lite` over `http://localhost`, not `file:///`, because it l
 
 `ASIT no relief` should also be tested over `http://localhost`.
 
+`ASIT no relief + TileJSON 2` should also be tested over `http://localhost`.
+
 ASIT ArcGIS Pro test URL:
 
 `http://localhost:8080/asit.color.no-relief.style.json`
+
+ASIT TileJSON 2 wrapper URL:
+
+`http://localhost:8080/asit.tiles.tilejson-2.0.json`
+
+ASIT TileJSON 2 style URL:
+
+`http://localhost:8080/asit.color.no-relief.tilejson-2.0.style.json`
 
 ArcGIS Pro test URL:
 

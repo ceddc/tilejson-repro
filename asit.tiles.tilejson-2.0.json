@@ -1,0 +1,115 @@
+{
+  "tilejson": "2.0.0",
+  "name": "asit.fond_couleur",
+  "description": "ASIT fond couleur",
+  "attribution": "g\u00e9odonn\u00e9es \u00a9 Etat de Vaud, \u00a9 Etat de Fribourg, \u00a9 Etat du Valais, \u00a9 Etat de Gen\u00e8ve, \u00a9 Etat de Berne & \u00a9 swisstopo",
+  "scheme": "xyz",
+  "tiles": [
+    "https://vt.asit-asso.ch/tiles/asit/v0.1/3857/{z}/{x}/{y}.mvt"
+  ],
+  "minzoom": 0,
+  "maxzoom": 16,
+  "bounds": [
+    5.96,
+    45.82,
+    10.49,
+    47.81
+  ],
+  "vector_layers": [
+    {
+      "id": "landcover",
+      "fields": {
+        "objektart": "object type"
+      }
+    },
+    {
+      "id": "landuse",
+      "fields": {
+        "objektart": "object type",
+        "name": "name"
+      }
+    },
+    {
+      "id": "waterway",
+      "fields": {
+        "objektart": "object type",
+        "verlauf": "verlauf",
+        "name": "river name",
+        "rank": "ranking (ascending) based on features length"
+      }
+    },
+    {
+      "id": "water",
+      "fields": {
+        "name": "lake name",
+        "rank": "ranking (ascending) based on features area"
+      }
+    },
+    {
+      "id": "airport",
+      "fields": {
+        "objektart": "object type"
+      }
+    },
+    {
+      "id": "building",
+      "fields": {
+        "underground": "boolean, if true, the building is underground"
+      }
+    },
+    {
+      "id": "street",
+      "fields": {
+        "objektart": "object type",
+        "richt_getr": "whether the traffic is separated or not on the street",
+        "stufe": "z index, indicates object vertical order",
+        "bedeutung": "Traffic significance",
+        "name": "street name, languages separated by / if multilingual"
+      }
+    },
+    {
+      "id": "parking",
+      "fields": {
+        "name": "parking name"
+      }
+    },
+    {
+      "id": "railway",
+      "fields": {
+        "stufe": "z index, indicates object vertical order",
+        "name": "railway name"
+      }
+    },
+    {
+      "id": "railway_platform",
+      "fields": {}
+    },
+    {
+      "id": "boundary",
+      "fields": {
+        "objektart": "object type",
+        "name": "default name",
+        "name_fr": "french name",
+        "name_de": "german name"
+      }
+    },
+    {
+      "id": "address",
+      "fields": {
+        "numero_mai": "Building entrance number",
+        "orientatio": "Building entrance number rotation in degree (CW from horizontal, west being 0 degree)"
+      }
+    },
+    {
+      "id": "place",
+      "fields": {
+        "objektart": "object type",
+        "name": "default name",
+        "name_fr": "french name",
+        "name_de": "german name",
+        "pop_cat": "population range",
+        "rank": "rank based on population"
+      }
+    }
+  ]
+}
