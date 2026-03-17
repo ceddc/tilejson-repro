@@ -21,6 +21,23 @@ URLs used:
 
 `CH basemap Pro lite` is a checked-in swisstopo derivative style for ArcGIS Pro testing. It keeps only the base TileJSON source, removes relief, removes sprite icons, and keeps text labels only.
 
+Adaptations made in the simple style:
+
+- derived from `https://vectortiles.geo.admin.ch/styles/ch.swisstopo.basemap.vt/style.json`
+- kept only the `base_v1.0.0` source and removed the `relief_v1.0.0` source
+- removed all layers that depended on the relief source
+- removed the top-level `sprite` reference
+- removed all `fill-pattern` usage
+- kept `background`, `fill`, and `line` layers from the base source only
+- trimmed `fill` paint to `fill-color`, `fill-opacity`, and `fill-antialias`
+- trimmed `line` paint to `line-color`, `line-width`, `line-opacity`, `line-dasharray`, and `line-offset`
+- trimmed `line` layout to `line-cap`, `line-join`, and `visibility`
+- kept only text-oriented symbol layers from `place`, `area_name`, `boundary`, `transportation_name`, `water_name`, and `waterway`
+- dropped symbol categories such as `poi`, `aerodrome_label`, `mountain_peak`, `spot_elevation`, `contour_line_pt`, `landcover_pt`, `park`, and `housenumber`
+- removed all `icon-*` properties from kept symbol layers
+- kept only text label properties such as `text-field`, `text-font`, `text-size`, `text-anchor`, `text-offset`, and halo/color settings
+- preserved layer `filter`, `minzoom`, and `maxzoom` where they existed
+
 ## Run
 
 Open `index.html` directly, or serve the folder:
