@@ -112,6 +112,7 @@
       <button id="swisstopoStyleModeButton" class="modeButton" type="button" aria-pressed="false">CH basemap style</button>
       <button id="swisstopoProLiteModeButton" class="modeButton" type="button" aria-pressed="false">CH basemap Pro lite</button>
       <button id="swisstopoDataCheckModeButton" class="modeButton" type="button" aria-pressed="false">CH data check</button>
+      <button id="swisstopoDataNoExprModeButton" class="modeButton" type="button" aria-pressed="false">CH data no expr</button>
       <button id="swisstopoDataFunctionsModeButton" class="modeButton" type="button" aria-pressed="false">CH data + functions</button>
       <button id="tileJsonModeButton" class="modeButton" type="button" aria-pressed="false">ASIT TileJSON</button>
     </div>
@@ -138,6 +139,7 @@
     const swisstopoStyleUrl = "https://vectortiles.geo.admin.ch/styles/ch.swisstopo.basemap.vt/style.json";
     const swisstopoProLiteStyleUrl = "./swisstopo.basemap.pro-lite.style.json";
     const swisstopoDataCheckStyleUrl = "./swisstopo.basemap.data-check.style.json";
+    const swisstopoDataNoExpressionsStyleUrl = "./swisstopo.basemap.data-check.no-expressions.style.json";
     const swisstopoDataFunctionsStyleUrl = "./swisstopo.basemap.data-check.functions.style.json";
     const swisstopoBaseTileJsonUrl = "https://vectortiles.geo.admin.ch/tiles/ch.swisstopo.base.vt/v1.0.0/tiles.json";
     const tileJsonUrl = "https://vt.asit-asso.ch/tiles/asit/v0.1/3857/tiles.json";
@@ -193,6 +195,14 @@
         tileJsonDisplay: swisstopoBaseTileJsonUrl,
         note: "Loads a very simple local diagnostic style with flat fills and lines only, no labels, no icons, no filters, and no expressions. Use this to see whether ArcGIS Pro is drawing the base polygon and line data at all."
       },
+      swisstopoDataNoExpr: {
+        buttonId: "swisstopoDataNoExprModeButton",
+        label: "CH data no expr",
+        runtimeUrl: swisstopoDataNoExpressionsStyleUrl,
+        displayUrl: swisstopoDataNoExpressionsStyleUrl,
+        tileJsonDisplay: swisstopoBaseTileJsonUrl,
+        note: "Loads the same 50-layer swisstopo data scope as `CH data + functions`, but strips out all filters, expressions, and zoom-stop functions. Remaining paint and layout values are flattened to simple constants so ArcGIS Pro can be tested against a broader layer set without expression logic."
+      },
       swisstopoDataFunctions: {
         buttonId: "swisstopoDataFunctionsModeButton",
         label: "CH data + functions",
@@ -224,6 +234,7 @@
       swisstopoStyle: document.getElementById("swisstopoStyleModeButton"),
       swisstopoProLite: document.getElementById("swisstopoProLiteModeButton"),
       swisstopoDataCheck: document.getElementById("swisstopoDataCheckModeButton"),
+      swisstopoDataNoExpr: document.getElementById("swisstopoDataNoExprModeButton"),
       swisstopoDataFunctions: document.getElementById("swisstopoDataFunctionsModeButton"),
       tilejson: document.getElementById("tileJsonModeButton")
     };
@@ -388,6 +399,12 @@
         modeButtons.swisstopoDataCheck.addEventListener("click", () => {
           if (currentMode !== "swisstopoDataCheck") {
             loadMode("swisstopoDataCheck");
+          }
+        });
+
+        modeButtons.swisstopoDataNoExpr.addEventListener("click", () => {
+          if (currentMode !== "swisstopoDataNoExpr") {
+            loadMode("swisstopoDataNoExpr");
           }
         });
 

@@ -9,6 +9,7 @@ Modes:
 - `CH basemap style`
 - `CH basemap Pro lite`
 - `CH data check`
+- `CH data no expr`
 - `CH data + functions`
 - `ASIT TileJSON`
 
@@ -22,6 +23,7 @@ URLs used:
 - swisstopo TileJSON shown in the panel: `https://vectortiles.geo.admin.ch/tiles/ch.swisstopo.base.vt/v1.0.0/tiles.json`
 - local Pro-lite style: `./swisstopo.basemap.pro-lite.style.json`
 - local data-check style: `./swisstopo.basemap.data-check.style.json`
+- local data no-expressions style: `./swisstopo.basemap.data-check.no-expressions.style.json`
 - local data + functions style: `./swisstopo.basemap.data-check.functions.style.json`
 
 `style.json` is the useful cartographic repro. `TileJSON` is the raw source-only repro.
@@ -85,6 +87,22 @@ Layers included in the data-check style:
 - `boundary`
 - `contour_line`
 
+## CH data no expr
+
+`CH data no expr` keeps the same broader 50-layer scope as `CH data + functions`, but removes the logic that is most likely to upset ArcGIS Pro.
+
+Adaptations in this style:
+
+- starts from `CH data + functions`
+- keeps the same background/fill/line layer set and ordering
+- removes all layer `filter` definitions
+- removes all expression arrays from paint and layout values
+- removes all zoom-stop function objects
+- flattens remaining fill and line styling to simple constant values
+- still excludes relief, symbols, labels, and fill patterns
+
+This is the best middle step if the issue seems tied to expression support rather than the source or layer inventory.
+
 ## CH data + functions
 
 `CH data + functions` keeps the same working source-layer scope as `CH data check`, but restores the original swisstopo filters, expressions, colors, widths, and ordering for those fill and line layers.
@@ -116,6 +134,8 @@ Test `CH basemap Pro lite` over `http://localhost`, not `file:///`, because it l
 
 `CH data check` should also be tested over `http://localhost`.
 
+`CH data no expr` should also be tested over `http://localhost`.
+
 `CH data + functions` should also be tested over `http://localhost`.
 
 `ASIT no relief` should also be tested over `http://localhost`.
@@ -141,6 +161,10 @@ ArcGIS Pro test URL:
 Diagnostic ArcGIS Pro test URL:
 
 `http://localhost:8080/swisstopo.basemap.data-check.style.json`
+
+No-expressions ArcGIS Pro test URL:
+
+`http://localhost:8080/swisstopo.basemap.data-check.no-expressions.style.json`
 
 Functions ArcGIS Pro test URL:
 
