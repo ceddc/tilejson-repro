@@ -25,6 +25,8 @@ Files used by the default page:
 - constant values or classic `stops` instead of nested expressions
 - text-only labels for `place`, `water_name`, `waterway`, `park`, `boundary`, `transportation_name`, `area_name`, `poi`, and `aerodrome_label`
 - plain token fields such as `{name}`, `{adm2_l}`, and `{adm4_r}` to avoid the previous `name:latin` compatibility path
+- family-first road ordering so motorways stay above smaller white roads
+- swisstopo-like transport colors for rail/transit and aerialways
 
 ### Technical Adaptations In `CH Pro compatible`
 
@@ -45,10 +47,25 @@ Fill and line styling changes:
 - starts from the working `CH data check` idea: one source and simple geometry rendering
 - rebuilds color classes by splitting the map into many explicit layers instead of using one expression-heavy layer
 - uses separate layers for glacier, forest, park-green landcover, sand, residential landuse, industrial landuse, utility landuse, pitch areas, lake/other water, bathymetry, construct, aeroway, and building fills
-- uses separate transportation layers for motorway/trunk, route overlays, primary/secondary, tertiary/minor/service, path/track, railway, and aerialway
+- uses separate transportation layers for motorway/trunk, route overlays, primary/secondary, tertiary/minor/service, path/track, railway, aerialway, and drag lift
 - uses separate boundary band and line layers for country, region, and local admin levels
 - uses classic zoom `stops` for widths, sizes, and a few opacity ramps
 - avoids nested `match`, `case`, `interpolate`, `step`, `%`, `to-number`, and `has` logic in paint/layout
+
+Road ordering changes:
+
+- splits the road stack into explicit road families instead of one large transport expression
+- uses separate road families for path/track, local/service/tertiary, primary/secondary, and trunk/motorway
+- uses explicit vertical buckets for `surface`, `l1`, and `l2plus`
+- keeps `casing -> fill -> route overlay` inside each non-path family
+- uses a family-first draw order so larger roads stay above smaller white roads, even though that is simpler than the hosted swisstopo overpass logic
+
+Public transport color changes:
+
+- restores swisstopo-like red rail/transit lines
+- restores red cable car/chair lift/gondola lines
+- restores orange drag lift lines
+- applies the same red/orange palette to transport labels instead of the earlier neutral placeholder colors
 
 Label changes:
 
@@ -59,7 +76,7 @@ Label changes:
   - `waterway`
   - `park`
   - `boundary-country-left/right`, `boundary-region-left/right`
-  - `transportation-road`, `transportation-rail`
+  - `transportation-road`, `transportation-rail`, `transportation-aerialway`, `transportation-drag-lift`
   - `area-name-landform`, `area-name-glacier`, `area-name-field`
 - `poi-transport`, `poi-nature`, `poi-history`, `poi-public`, `poi-motorway`
 - `aerodrome`
@@ -79,14 +96,15 @@ Deliberately not carried over from the hosted swisstopo style:
 - computed `symbol-sort-key`
 - `text-variable-anchor`
 - width-, population-, size-, rank-, elevation-, or depth-driven expression logic
+- full bridge/tunnel/overpass parity with the hosted transport stack
 
 Current shape of the local style:
 
 - `1` vector source
-- `62` layers total
+- `89` layers total
 - no `sprite`
 - no `fill-pattern`
-- text labels preserved in simplified form, including cities and selected POI families
+- text labels preserved in simplified form, including cities, selected POI families, and transport labels
 - colors preserved through split layers instead of dynamic expressions
 
 Additional test style JSON files are still checked in beside the page for direct ArcGIS Pro tests, but they are no longer linked from the default `index.html`.
