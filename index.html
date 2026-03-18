@@ -108,6 +108,7 @@
     <div class="buttonRow" role="group" aria-label="Source mode">
       <button id="swisstopoStyleModeButton" class="modeButton" type="button" aria-pressed="true">CH basemap style</button>
       <button id="swisstopoDataCheckModeButton" class="modeButton" type="button" aria-pressed="false">CH data check</button>
+      <button id="swisstopoProCompatibleModeButton" class="modeButton" type="button" aria-pressed="false">CH Pro compatible</button>
     </div>
 
     <div class="label">Primary URL</div>
@@ -128,6 +129,7 @@
   <script type="module">
     const swisstopoStyleUrl = "https://vectortiles.geo.admin.ch/styles/ch.swisstopo.basemap.vt/style.json";
     const swisstopoDataCheckStyleUrl = "./swisstopo.basemap.data-check.style.json";
+    const swisstopoProCompatibleStyleUrl = "./swisstopo.basemap.pro-compatible.style.json";
     const swisstopoBaseTileJsonUrl = "https://vectortiles.geo.admin.ch/tiles/ch.swisstopo.base.vt/v1.0.0/tiles.json";
     const center = [7.4586, 46.9598];
     const zoom = 12;
@@ -148,6 +150,14 @@
         displayUrl: swisstopoDataCheckStyleUrl,
         tileJsonDisplay: swisstopoBaseTileJsonUrl,
         note: "Loads the simple local diagnostic style with flat fills and lines only. Serve this page over http://localhost for this mode."
+      },
+      swisstopoProCompatible: {
+        buttonId: "swisstopoProCompatibleModeButton",
+        label: "CH Pro compatible",
+        runtimeUrl: swisstopoProCompatibleStyleUrl,
+        displayUrl: swisstopoProCompatibleStyleUrl,
+        tileJsonDisplay: swisstopoBaseTileJsonUrl,
+        note: "Loads a local one-source swisstopo variant rebuilt into simpler Esri-like rules: split fill and line layers, constant values or classic stops, and text-only labels with no icons, relief, or fill patterns. Serve this page over http://localhost for this mode."
       }
     };
 
@@ -159,7 +169,8 @@
     const statusMessageNode = document.getElementById("statusMessage");
     const modeButtons = {
       swisstopoStyle: document.getElementById("swisstopoStyleModeButton"),
-      swisstopoDataCheck: document.getElementById("swisstopoDataCheckModeButton")
+      swisstopoDataCheck: document.getElementById("swisstopoDataCheckModeButton"),
+      swisstopoProCompatible: document.getElementById("swisstopoProCompatibleModeButton")
     };
 
     window.__status = {
@@ -256,6 +267,7 @@
 
     modeButtons.swisstopoStyle.addEventListener("click", () => loadMode("swisstopoStyle"));
     modeButtons.swisstopoDataCheck.addEventListener("click", () => loadMode("swisstopoDataCheck"));
+    modeButtons.swisstopoProCompatible.addEventListener("click", () => loadMode("swisstopoProCompatible"));
 
     syncPanel(currentMode);
     loadMode(currentMode);
