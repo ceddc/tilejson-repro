@@ -26,6 +26,66 @@ Files used by the default page:
 - text-only labels for `place`, `water_name`, `waterway`, `boundary`, `transportation_name`, and `area_name`
 - token-based label fields such as `{name:latin}`, `{adm2_l}`, and `{adm4_r}`
 
+### Technical Adaptations In `CH Pro compatible`
+
+The goal of this variant is not visual parity with the hosted swisstopo style. The goal is to keep the same data source, preserve recognizable swisstopo colors and labels, and encode them in a style shape that is closer to what ArcGIS Pro appears to accept.
+
+Source and top-level changes:
+
+- keeps the same `base_v1.0.0` TileJSON source
+- keeps `version: 8`
+- keeps `glyphs`
+- removes the relief source and all relief-backed layers
+- removes `sprite`
+- removes `fill-pattern`
+- removes nonessential top-level extras such as `transition`
+
+Fill and line styling changes:
+
+- starts from the working `CH data check` idea: one source and simple geometry rendering
+- rebuilds color classes by splitting the map into many explicit layers instead of using one expression-heavy layer
+- uses separate layers for major land classes such as glacier, vegetation, sand, residential landuse, industrial landuse, pitch areas, water, bathymetry, construct, aeroway, and building fills
+- uses separate transportation layers for motorway/trunk, primary/secondary, tertiary/minor/service, path/track, railway, and aerialway
+- uses separate boundary layers for country, region, and local admin levels
+- uses classic zoom `stops` for widths, sizes, and a few opacity ramps
+- avoids nested `match`, `case`, `interpolate`, `step`, `%`, `to-number`, and `has` logic in paint/layout
+
+Label changes:
+
+- labels are text-only symbol layers, with no icon+text combo layers
+- label families are split into explicit layers:
+  - `place-country`, `place-city`, `place-town`, `place-village`
+  - `water-name`
+  - `waterway`
+  - `boundary-country-left/right`, `boundary-region-left/right`
+  - `transportation-road`, `transportation-rail`
+  - `area-name-landform`, `area-name-glacier`, `area-name-field`
+- label fields are simple token strings such as `{name:latin}`, `{adm2_l}`, `{adm2_r}`, `{adm4_l}`, and `{adm4_r}`
+- label sizes use constant values or `stops`
+- label paint is fixed per layer: text color, halo color, halo width, and halo blur are all simple values or `stops`
+
+Deliberately not carried over from the hosted swisstopo style:
+
+- relief and hillshade rendering
+- sprite-driven icons and shields
+- road-number boxes
+- computed `icon-image`
+- computed `text-field`
+- computed `text-size`
+- computed `text-opacity`
+- computed `symbol-sort-key`
+- `text-variable-anchor`
+- width-, population-, size-, rank-, elevation-, or depth-driven expression logic
+
+Current shape of the local style:
+
+- `1` vector source
+- `45` layers total
+- no `sprite`
+- no `fill-pattern`
+- text labels preserved in simplified form
+- colors preserved through split layers instead of dynamic expressions
+
 Additional test style JSON files are still checked in beside the page for direct ArcGIS Pro tests, but they are no longer linked from the default `index.html`.
 
 ## Run
