@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Vector Tile Style Repro - ArcGIS JS API 5.0</title>
+  <title>Swisstopo Style Repro - ArcGIS JS API 5.0</title>
   <link rel="stylesheet" href="https://js.arcgis.com/5.0/esri/themes/light/main.css" />
   <script type="module" src="https://js.arcgis.com/5.0/"></script>
   <style>
@@ -25,7 +25,7 @@
       top: 12px;
       left: 12px;
       z-index: 10;
-      width: min(500px, calc(100vw - 24px));
+      width: min(420px, calc(100vw - 24px));
       padding: 12px 14px;
       border: 1px solid #8e9aaf;
       border-radius: 8px;
@@ -106,15 +106,8 @@
 
     <div class="label">Mode</div>
     <div class="buttonRow" role="group" aria-label="Source mode">
-      <button id="remoteStyleModeButton" class="modeButton" type="button" aria-pressed="true">ASIT remote style</button>
-      <button id="asitNoReliefModeButton" class="modeButton" type="button" aria-pressed="false">ASIT no relief</button>
-      <button id="asitNoReliefTileJson2ModeButton" class="modeButton" type="button" aria-pressed="false">ASIT no relief + TileJSON 2</button>
-      <button id="swisstopoStyleModeButton" class="modeButton" type="button" aria-pressed="false">CH basemap style</button>
-      <button id="swisstopoProLiteModeButton" class="modeButton" type="button" aria-pressed="false">CH basemap Pro lite</button>
+      <button id="swisstopoStyleModeButton" class="modeButton" type="button" aria-pressed="true">CH basemap style</button>
       <button id="swisstopoDataCheckModeButton" class="modeButton" type="button" aria-pressed="false">CH data check</button>
-      <button id="swisstopoDataNoExprModeButton" class="modeButton" type="button" aria-pressed="false">CH data no expr</button>
-      <button id="swisstopoDataFunctionsModeButton" class="modeButton" type="button" aria-pressed="false">CH data + functions</button>
-      <button id="tileJsonModeButton" class="modeButton" type="button" aria-pressed="false">ASIT TileJSON</button>
     </div>
 
     <div class="label">Primary URL</div>
@@ -131,61 +124,22 @@
 
     <pre id="statusMessage" class="value"></pre>
   </section>
+
   <script type="module">
-    const remoteStyleUrl = "https://vt.asit-asso.ch/styles/asit.color/style.json";
-    const asitNoReliefStyleUrl = "./asit.color.no-relief.style.json";
-    const asitTileJson2Url = "./asit.tiles.tilejson-2.0.json";
-    const asitNoReliefTileJson2StyleUrl = "./asit.color.no-relief.tilejson-2.0.style.json";
     const swisstopoStyleUrl = "https://vectortiles.geo.admin.ch/styles/ch.swisstopo.basemap.vt/style.json";
-    const swisstopoProLiteStyleUrl = "./swisstopo.basemap.pro-lite.style.json";
     const swisstopoDataCheckStyleUrl = "./swisstopo.basemap.data-check.style.json";
-    const swisstopoDataNoExpressionsStyleUrl = "./swisstopo.basemap.data-check.no-expressions.style.json";
-    const swisstopoDataFunctionsStyleUrl = "./swisstopo.basemap.data-check.functions.style.json";
     const swisstopoBaseTileJsonUrl = "https://vectortiles.geo.admin.ch/tiles/ch.swisstopo.base.vt/v1.0.0/tiles.json";
-    const tileJsonUrl = "https://vt.asit-asso.ch/tiles/asit/v0.1/3857/tiles.json";
     const center = [7.4586, 46.9598];
     const zoom = 12;
 
     const modes = {
-      remoteStyle: {
-        buttonId: "remoteStyleModeButton",
-        label: "ASIT remote style",
-        runtimeUrl: remoteStyleUrl,
-        displayUrl: remoteStyleUrl,
-        tileJsonDisplay: tileJsonUrl,
-        note: "Loads the hosted ASIT style JSON and applies the ASIT cartography on top of the vector tiles from the TileJSON source below."
-      },
-      asitNoRelief: {
-        buttonId: "asitNoReliefModeButton",
-        label: "ASIT no relief",
-        runtimeUrl: asitNoReliefStyleUrl,
-        displayUrl: asitNoReliefStyleUrl,
-        tileJsonDisplay: tileJsonUrl,
-        note: "Loads a local copy of the ASIT color style with only the `relief` raster source and `Hillshade` raster layer removed. Use this to test whether ArcGIS Pro accepts the same ASIT style once the secondary raster source is gone. Serve this page over http://localhost for this mode."
-      },
-      asitNoReliefTileJson2: {
-        buttonId: "asitNoReliefTileJson2ModeButton",
-        label: "ASIT no relief + TileJSON 2",
-        runtimeUrl: asitNoReliefTileJson2StyleUrl,
-        displayUrl: asitNoReliefTileJson2StyleUrl,
-        tileJsonDisplay: asitTileJson2Url,
-        note: "Loads the same local ASIT no-relief style, but points it at a local TileJSON wrapper that only changes the advertised TileJSON version from 3.0.0 to 2.0.0. The actual vector tiles, bounds, and layer metadata stay the same. Serve this page over http://localhost for this mode."
-      },
       swisstopoStyle: {
         buttonId: "swisstopoStyleModeButton",
         label: "CH basemap style",
         runtimeUrl: swisstopoStyleUrl,
         displayUrl: swisstopoStyleUrl,
         tileJsonDisplay: swisstopoBaseTileJsonUrl,
-        note: "Loads the hosted swisstopo basemap style online. For simplicity, the panel shows only the main base TileJSON source and skips the additional relief source used by the full style."
-      },
-      swisstopoProLite: {
-        buttonId: "swisstopoProLiteModeButton",
-        label: "CH basemap Pro lite",
-        runtimeUrl: swisstopoProLiteStyleUrl,
-        displayUrl: swisstopoProLiteStyleUrl,
-        tileJsonDisplay: swisstopoBaseTileJsonUrl,
-        note: "Loads the local swisstopo Pro-lite style: base source only, no relief, no sprite icons, text labels only, tuned for ArcGIS Pro testing. Serve this page over http://localhost for this mode."
+        note: "Loads the hosted swisstopo basemap style online."
       },
       swisstopoDataCheck: {
         buttonId: "swisstopoDataCheckModeButton",
@@ -193,31 +147,7 @@
         runtimeUrl: swisstopoDataCheckStyleUrl,
         displayUrl: swisstopoDataCheckStyleUrl,
         tileJsonDisplay: swisstopoBaseTileJsonUrl,
-        note: "Loads a very simple local diagnostic style with flat fills and lines only, no labels, no icons, no filters, and no expressions. Use this to see whether ArcGIS Pro is drawing the base polygon and line data at all."
-      },
-      swisstopoDataNoExpr: {
-        buttonId: "swisstopoDataNoExprModeButton",
-        label: "CH data no expr",
-        runtimeUrl: swisstopoDataNoExpressionsStyleUrl,
-        displayUrl: swisstopoDataNoExpressionsStyleUrl,
-        tileJsonDisplay: swisstopoBaseTileJsonUrl,
-        note: "Loads the same 50-layer swisstopo data scope as `CH data + functions`, but strips out all filters, expressions, and zoom-stop functions. Remaining paint and layout values are flattened to simple constants so ArcGIS Pro can be tested against a broader layer set without expression logic."
-      },
-      swisstopoDataFunctions: {
-        buttonId: "swisstopoDataFunctionsModeButton",
-        label: "CH data + functions",
-        runtimeUrl: swisstopoDataFunctionsStyleUrl,
-        displayUrl: swisstopoDataFunctionsStyleUrl,
-        tileJsonDisplay: swisstopoBaseTileJsonUrl,
-        note: "Loads the same working swisstopo data-check layer scope, but restores the original swisstopo fill and line filters, expressions, colors, and widths for those layers. Relief, symbols, sprite-driven styling, and fill patterns still stay out."
-      },
-      tilejson: {
-        buttonId: "tileJsonModeButton",
-        label: "ASIT TileJSON",
-        runtimeUrl: tileJsonUrl,
-        displayUrl: tileJsonUrl,
-        tileJsonDisplay: tileJsonUrl,
-        note: "Loads only the raw vector tile source. Useful to prove data access, but it does not represent the final ASIT styling."
+        note: "Loads the simple local diagnostic style with flat fills and lines only. Serve this page over http://localhost for this mode."
       }
     };
 
@@ -228,23 +158,17 @@
     const statusValueNode = document.getElementById("statusValue");
     const statusMessageNode = document.getElementById("statusMessage");
     const modeButtons = {
-      remoteStyle: document.getElementById("remoteStyleModeButton"),
-      asitNoRelief: document.getElementById("asitNoReliefModeButton"),
-      asitNoReliefTileJson2: document.getElementById("asitNoReliefTileJson2ModeButton"),
       swisstopoStyle: document.getElementById("swisstopoStyleModeButton"),
-      swisstopoProLite: document.getElementById("swisstopoProLiteModeButton"),
-      swisstopoDataCheck: document.getElementById("swisstopoDataCheckModeButton"),
-      swisstopoDataNoExpr: document.getElementById("swisstopoDataNoExprModeButton"),
-      swisstopoDataFunctions: document.getElementById("swisstopoDataFunctionsModeButton"),
-      tilejson: document.getElementById("tileJsonModeButton")
+      swisstopoDataCheck: document.getElementById("swisstopoDataCheckModeButton")
     };
 
     window.__status = {
       step: "loading",
-      mode: "remoteStyle",
+      mode: "swisstopoStyle",
       message: "Waiting for the map to initialize."
     };
-    let currentMode = "remoteStyle";
+
+    let currentMode = "swisstopoStyle";
     let currentLayer = null;
     let loadToken = 0;
 
@@ -262,175 +186,79 @@
       }
     }
 
-    function errorMessage(error) {
-      return error?.message || String(error);
-    }
-
-    function setModeUi(modeKey) {
+    function syncPanel(modeKey) {
       const mode = modes[modeKey];
-      currentMode = modeKey;
       primaryUrlNode.textContent = mode.displayUrl;
       tileJsonUrlNode.textContent = mode.tileJsonDisplay;
       modeNoteNode.textContent = mode.note;
 
-      for (const [key, button] of Object.entries(modeButtons)) {
+      Object.entries(modeButtons).forEach(([key, button]) => {
         button.setAttribute("aria-pressed", String(key === modeKey));
-      }
+      });
     }
 
-    window.addEventListener("error", (event) => {
-      const message = event.message || "Unknown window error";
-      console.error("WINDOW_FAIL", message);
-      setStatus("window-error", message);
+    const [Map, MapView, VectorTileLayer] = await Promise.all([
+      $arcgis.import("@arcgis/core/Map.js"),
+      $arcgis.import("@arcgis/core/views/MapView.js"),
+      $arcgis.import("@arcgis/core/layers/VectorTileLayer.js")
+    ]);
+
+    const map = new Map();
+    const view = new MapView({
+      container: "viewDiv",
+      map,
+      center,
+      zoom
     });
 
-    window.addEventListener("unhandledrejection", (event) => {
-      const message = errorMessage(event.reason);
-      console.error("UNHANDLED_REJECTION", message);
-      setStatus("unhandledrejection-error", message);
-    });
+    async function loadMode(modeKey) {
+      currentMode = modeKey;
+      const token = ++loadToken;
+      const mode = modes[modeKey];
 
-    setModeUi(currentMode);
-    setStatus("loading", "Waiting for layer and view to load.");
+      syncPanel(modeKey);
+      setStatus("loading", `Loading ${mode.label}...`);
 
-    try {
-      const [Map, MapView, VectorTileLayer] = await $arcgis.import([
-        "@arcgis/core/Map.js",
-        "@arcgis/core/views/MapView.js",
-        "@arcgis/core/layers/VectorTileLayer.js"
-      ]);
+      if (currentLayer) {
+        map.remove(currentLayer);
+        currentLayer.destroy();
+        currentLayer = null;
+      }
 
-      currentLayer = new VectorTileLayer({ url: modes[currentMode].runtimeUrl });
-      const map = new Map({ layers: [currentLayer] });
-
-      const view = new MapView({
-        container: "viewDiv",
-        map,
-        center,
-        zoom
-      });
-
-      async function loadMode(modeKey) {
-        const mode = modes[modeKey];
-        const requestId = ++loadToken;
-        setModeUi(modeKey);
-        setStatus("loading", `Loading ${mode.label}...`);
-
-        if (currentLayer) {
-          map.remove(currentLayer);
-          currentLayer.destroy();
-          currentLayer = null;
-        }
-
+      try {
         const layer = new VectorTileLayer({ url: mode.runtimeUrl });
         currentLayer = layer;
         map.add(layer);
 
-        layer.when().then(() => {
-          if (requestId !== loadToken) {
-            return;
-          }
-          console.log("LAYER_OK");
-          setStatus("layer-ok", `VectorTileLayer resolved successfully from ${mode.label}.`);
-        }).catch((error) => {
-          if (requestId !== loadToken) {
-            return;
-          }
-          const message = errorMessage(error);
-          console.error("LAYER_FAIL", message);
-          setStatus("layer-error", message);
-        });
-
-        try {
-          await layer.when();
-          if (requestId !== loadToken) {
-            return;
-          }
-          await view.whenLayerView(layer);
-          if (requestId !== loadToken) {
-            return;
-          }
-          console.log("LAYERVIEW_OK");
-          setStatus("layerview-ok", `LayerView created successfully. ${mode.note}`);
-        } catch (error) {
-          if (requestId !== loadToken) {
-            return;
-          }
-          const message = errorMessage(error);
-          if (window.__status.step === "layer-error") {
-            return;
-          }
-          console.error("LAYERVIEW_FAIL", message);
-          setStatus("layerview-error", message);
+        await layer.when();
+        if (token !== loadToken) {
+          return;
         }
+        console.log("LAYER_OK", mode.runtimeUrl);
+        setStatus("layer-ok", "Layer metadata loaded.");
+
+        await view.when();
+        await view.whenLayerView(layer);
+        if (token !== loadToken) {
+          return;
+        }
+        console.log("LAYERVIEW_OK", mode.runtimeUrl);
+        setStatus("layerview-ok", "Layer view created and drawing.");
+      } catch (error) {
+        if (token !== loadToken) {
+          return;
+        }
+        const message = error?.message || String(error);
+        console.error("LAYER_FAIL", mode.runtimeUrl, error);
+        setStatus("layer-error", message);
       }
-
-      view.when().then(() => {
-        modeButtons.remoteStyle.addEventListener("click", () => {
-          if (currentMode !== "remoteStyle") {
-            loadMode("remoteStyle");
-          }
-        });
-
-        modeButtons.asitNoRelief.addEventListener("click", () => {
-          if (currentMode !== "asitNoRelief") {
-            loadMode("asitNoRelief");
-          }
-        });
-
-        modeButtons.asitNoReliefTileJson2.addEventListener("click", () => {
-          if (currentMode !== "asitNoReliefTileJson2") {
-            loadMode("asitNoReliefTileJson2");
-          }
-        });
-
-        modeButtons.swisstopoStyle.addEventListener("click", () => {
-          if (currentMode !== "swisstopoStyle") {
-            loadMode("swisstopoStyle");
-          }
-        });
-
-        modeButtons.swisstopoProLite.addEventListener("click", () => {
-          if (currentMode !== "swisstopoProLite") {
-            loadMode("swisstopoProLite");
-          }
-        });
-
-        modeButtons.swisstopoDataCheck.addEventListener("click", () => {
-          if (currentMode !== "swisstopoDataCheck") {
-            loadMode("swisstopoDataCheck");
-          }
-        });
-
-        modeButtons.swisstopoDataNoExpr.addEventListener("click", () => {
-          if (currentMode !== "swisstopoDataNoExpr") {
-            loadMode("swisstopoDataNoExpr");
-          }
-        });
-
-        modeButtons.swisstopoDataFunctions.addEventListener("click", () => {
-          if (currentMode !== "swisstopoDataFunctions") {
-            loadMode("swisstopoDataFunctions");
-          }
-        });
-
-        modeButtons.tilejson.addEventListener("click", () => {
-          if (currentMode !== "tilejson") {
-            loadMode("tilejson");
-          }
-        });
-
-        loadMode(currentMode);
-      }).catch((error) => {
-        const message = errorMessage(error);
-        console.error("VIEW_FAIL", message);
-        setStatus("view-error", message);
-      });
-    } catch (error) {
-      const message = errorMessage(error);
-      console.error("BOOT_FAIL", message);
-      setStatus("boot-error", message);
     }
+
+    modeButtons.swisstopoStyle.addEventListener("click", () => loadMode("swisstopoStyle"));
+    modeButtons.swisstopoDataCheck.addEventListener("click", () => loadMode("swisstopoDataCheck"));
+
+    syncPanel(currentMode);
+    loadMode(currentMode);
   </script>
 </body>
 </html>
