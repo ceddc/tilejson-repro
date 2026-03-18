@@ -127,9 +127,12 @@
   </section>
 
   <script type="module">
+    const publicBaseUrl = "https://ceddc.github.io/tilejson-repro/";
     const swisstopoStyleUrl = "https://vectortiles.geo.admin.ch/styles/ch.swisstopo.basemap.vt/style.json";
     const swisstopoDataCheckStyleUrl = "./swisstopo.basemap.data-check.style.json";
     const swisstopoProCompatibleStyleUrl = "./swisstopo.basemap.pro-compatible.style.json";
+    const swisstopoDataCheckPublicUrl = `${publicBaseUrl}swisstopo.basemap.data-check.style.json`;
+    const swisstopoProCompatiblePublicUrl = `${publicBaseUrl}swisstopo.basemap.pro-compatible.style.json`;
     const swisstopoBaseTileJsonUrl = "https://vectortiles.geo.admin.ch/tiles/ch.swisstopo.base.vt/v1.0.0/tiles.json";
     const center = [7.4586, 46.9598];
     const zoom = 12;
@@ -147,17 +150,17 @@
         buttonId: "swisstopoDataCheckModeButton",
         label: "CH data check",
         runtimeUrl: swisstopoDataCheckStyleUrl,
-        displayUrl: swisstopoDataCheckStyleUrl,
+        displayUrl: swisstopoDataCheckPublicUrl,
         tileJsonDisplay: swisstopoBaseTileJsonUrl,
-        note: "Loads the simple local diagnostic style with flat fills and lines only. Serve this page over http://localhost for this mode."
+        note: "Loads the simple diagnostic style with flat fills and lines only. The panel shows the public GitHub Pages URL you can paste directly into ArcGIS Pro."
       },
       swisstopoProCompatible: {
         buttonId: "swisstopoProCompatibleModeButton",
         label: "CH Pro compatible",
         runtimeUrl: swisstopoProCompatibleStyleUrl,
-        displayUrl: swisstopoProCompatibleStyleUrl,
+        displayUrl: swisstopoProCompatiblePublicUrl,
         tileJsonDisplay: swisstopoBaseTileJsonUrl,
-        note: "Loads a local one-source swisstopo variant rebuilt into simpler ArcGIS Pro-friendly rules: more explicit swisstopo color buckets, plain text labels on {name}, and selected POI text labels with no icons, relief, or fill patterns. Serve this page over http://localhost for this mode."
+        note: "Loads a one-source swisstopo variant rebuilt into simpler ArcGIS Pro-friendly rules: more explicit swisstopo color buckets, plain text labels on {name}, and selected POI text labels with no icons, relief, or fill patterns. The panel shows the public GitHub Pages URL you can paste directly into ArcGIS Pro."
       }
     };
 

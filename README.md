@@ -12,8 +12,8 @@ Files used by the default page:
 
 - swisstopo style: `https://vectortiles.geo.admin.ch/styles/ch.swisstopo.basemap.vt/style.json`
 - swisstopo TileJSON shown in the panel: `https://vectortiles.geo.admin.ch/tiles/ch.swisstopo.base.vt/v1.0.0/tiles.json`
-- local data-check style: `./swisstopo.basemap.data-check.style.json`
-- local Pro-compatible style: `./swisstopo.basemap.pro-compatible.style.json`
+- public data-check style: `https://ceddc.github.io/tilejson-repro/swisstopo.basemap.data-check.style.json`
+- public Pro-compatible style: `https://ceddc.github.io/tilejson-repro/swisstopo.basemap.pro-compatible.style.json`
 
 `CH data check` is the simple local diagnostic style with flat fills and lines only, no labels, no icons, no filters, and no expressions.
 
@@ -91,6 +91,12 @@ Current shape of the local style:
 
 Additional test style JSON files are still checked in beside the page for direct ArcGIS Pro tests, but they are no longer linked from the default `index.html`.
 
+## Public URLs
+
+- website: `https://ceddc.github.io/tilejson-repro/`
+- data-check style: `https://ceddc.github.io/tilejson-repro/swisstopo.basemap.data-check.style.json`
+- Pro-compatible style: `https://ceddc.github.io/tilejson-repro/swisstopo.basemap.pro-compatible.style.json`
+
 ## Run
 
 ```powershell
@@ -109,6 +115,11 @@ ArcGIS Pro test URL for the simple local style:
 ArcGIS Pro test URL for the Pro-compatible style:
 
 - `http://localhost:8080/swisstopo.basemap.pro-compatible.style.json`
+
+ArcGIS Pro test URL on the public website:
+
+- `https://ceddc.github.io/tilejson-repro/swisstopo.basemap.data-check.style.json`
+- `https://ceddc.github.io/tilejson-repro/swisstopo.basemap.pro-compatible.style.json`
 
 ## Expected result
 
