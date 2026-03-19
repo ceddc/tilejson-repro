@@ -25,7 +25,7 @@ Files used by the default page:
 - constant values or classic `stops` instead of nested expressions
 - text-only labels for `place`, `water_name`, `waterway`, `park`, `boundary`, `transportation_name`, `area_name`, `poi`, and `aerodrome_label`
 - plain token fields such as `{name}`, `{adm2_l}`, and `{adm4_r}` to avoid the previous `name:latin` compatibility path
-- family-first road ordering so motorways stay above smaller white roads
+- elevation-first transport ordering: `surface transport -> buildings -> l1 transport -> l2plus transport -> labels`
 - swisstopo-like transport colors for rail/transit and aerialways
 
 ### Technical Adaptations In `CH Pro compatible`
@@ -52,13 +52,19 @@ Fill and line styling changes:
 - uses classic zoom `stops` for widths, sizes, and a few opacity ramps
 - avoids nested `match`, `case`, `interpolate`, `step`, `%`, `to-number`, and `has` logic in paint/layout
 
-Road ordering changes:
+Transport ordering changes:
 
 - splits the road stack into explicit road families instead of one large transport expression
 - uses separate road families for path/track, local/service/tertiary, primary/secondary, and trunk/motorway
 - uses explicit vertical buckets for `surface`, `l1`, and `l2plus`
+- uses the simplified hosted-style band order `surface transport -> buildings -> l1 transport -> l2plus transport -> labels`
+- moves `building-fill`, `building-roof-fill`, and `building-line` between surface transport and elevated transport so bridges and raised lines can sit above them
 - keeps `casing -> fill -> route overlay` inside each non-path family
-- uses a family-first draw order so larger roads stay above smaller white roads, even though that is simpler than the hosted swisstopo overpass logic
+- draws each transport band in this order: path/track, local/service/tertiary, primary/secondary, trunk/motorway, then rail/transit
+- splits rail/transit into `railway-surface-line`, `railway-l1-line`, and `railway-l2plus-line`
+- keeps aerialways only in the top elevated band as `aerialway-l2plus-line`
+- keeps drag lifts only in the top elevated band as `drag-lift-l2plus-line`
+- keeps tunnel parity and full hosted overpass logic out of scope on purpose
 
 Public transport color changes:
 
@@ -101,7 +107,7 @@ Deliberately not carried over from the hosted swisstopo style:
 Current shape of the local style:
 
 - `1` vector source
-- `89` layers total
+- `91` layers total
 - no `sprite`
 - no `fill-pattern`
 - text labels preserved in simplified form, including cities, selected POI families, and transport labels
