@@ -3730,6 +3730,96 @@
         "text-keep-upright": true
       },
       "paint": {
+        "text-color": "rgb(40, 40, 40)",
+        "text-halo-blur": 0.25,
+        "text-halo-color": "rgba(255, 255, 255, 0.9)",
+        "text-halo-width": 1
+      },
+      "minzoom": 13,
+      "maxzoom": 18,
+      "filter": [
+        "all",
+        [
+          "in",
+          "class",
+          "motorway",
+          "primary",
+          "secondary",
+          "tertiary",
+          "trunk"
+        ],
+        [
+          "any",
+          [
+            "!has",
+            "is_route"
+          ],
+          [
+            "all",
+            [
+              "!=",
+              "is_route",
+              5
+            ],
+            [
+              "!=",
+              "is_route",
+              6
+            ],
+            [
+              "!=",
+              "is_route",
+              7
+            ],
+            [
+              "!=",
+              "is_route",
+              8
+            ],
+            [
+              "!=",
+              "is_route",
+              10
+            ],
+            [
+              "!=",
+              "is_route",
+              99
+            ]
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "transportation-road-route-label",
+      "type": "symbol",
+      "source": "base_v1.0.0",
+      "source-layer": "transportation_name",
+      "layout": {
+        "visibility": "visible",
+        "text-field": "{name}",
+        "text-font": [
+          "Frutiger Neue Condensed Regular"
+        ],
+        "text-size": {
+          "stops": [
+            [
+              13,
+              10
+            ],
+            [
+              18,
+              16
+            ]
+          ]
+        },
+        "symbol-placement": "line",
+        "symbol-spacing": 400,
+        "text-letter-spacing": 0.03,
+        "text-max-width": 9999,
+        "text-keep-upright": true
+      },
+      "paint": {
         "text-color": "rgb(55, 43, 22)",
         "text-halo-blur": 0.25,
         "text-halo-color": "rgba(247, 235, 220, 0.8)",
@@ -3738,13 +3828,26 @@
       "minzoom": 13,
       "maxzoom": 18,
       "filter": [
-        "in",
-        "class",
-        "motorway",
-        "primary",
-        "secondary",
-        "tertiary",
-        "trunk"
+        "all",
+        [
+          "in",
+          "class",
+          "motorway",
+          "primary",
+          "secondary",
+          "tertiary",
+          "trunk"
+        ],
+        [
+          "in",
+          "is_route",
+          5,
+          6,
+          7,
+          8,
+          10,
+          99
+        ]
       ]
     },
     {
@@ -3779,7 +3882,7 @@
       "paint": {
         "text-color": "rgb(183, 57, 57)",
         "text-halo-blur": 0.25,
-        "text-halo-color": "rgba(255, 255, 255, 0.85)",
+        "text-halo-color": "rgba(255, 255, 255, 0.8)",
         "text-halo-width": 1
       },
       "minzoom": 13,
@@ -3788,7 +3891,9 @@
         "in",
         "class",
         "rail",
-        "transit"
+        "transit",
+        "rail_construction",
+        "transit_construction"
       ]
     },
     {
@@ -3823,7 +3928,7 @@
       "paint": {
         "text-color": "rgb(183, 57, 57)",
         "text-halo-blur": 0.25,
-        "text-halo-color": "rgba(255, 255, 255, 0.85)",
+        "text-halo-color": "rgba(255, 255, 255, 0.8)",
         "text-halo-width": 1
       },
       "minzoom": 13,
@@ -3868,7 +3973,7 @@
       "paint": {
         "text-color": "rgb(180, 111, 14)",
         "text-halo-blur": 0.25,
-        "text-halo-color": "rgba(255, 255, 255, 0.85)",
+        "text-halo-color": "rgba(255, 255, 255, 0.8)",
         "text-halo-width": 1
       },
       "minzoom": 13,
