@@ -61,6 +61,15 @@
       line-height: 1.4;
     }
 
+    .value a {
+      color: #0b6e99;
+      text-decoration: none;
+    }
+
+    .value a:hover {
+      text-decoration: underline;
+    }
+
     .buttonRow {
       display: flex;
       gap: 8px;
@@ -103,6 +112,11 @@
   <section id="statusPanel" data-state="loading" aria-live="polite">
     <div class="label">API</div>
     <div class="value">ArcGIS Maps SDK for JavaScript 5.0</div>
+
+    <div class="label">GitHub Repo</div>
+    <div class="value">
+      <a href="https://github.com/ceddc/tilejson-repro" target="_blank" rel="noreferrer noopener">ceddc/tilejson-repro</a>
+    </div>
 
     <div class="label">Mode</div>
     <div class="buttonRow" role="group" aria-label="Source mode">
